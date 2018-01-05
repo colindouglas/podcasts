@@ -21,7 +21,7 @@ if (start_fresh == FALSE) {
   
   ### Split the guests column into vectors
   episode$guests <- strsplit(episode$guests, ", ")
-  
+
   ### Get the URL of the last episode processed
   last_ep <- tail(episode$url,1)
   
