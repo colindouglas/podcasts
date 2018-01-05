@@ -1,51 +1,7 @@
-[Comedy Bang Bang](http://www.earwolf.com/show/comedy-bang-bang/) is an alt-comedy improv podcast published at least weekly since 2009. Each episode features one or more guests, who may be playing themselves or an improvised character. Since its inception, there have been 556 episodes with 432 unique guests.
+Comedy Bang Bang is an alt-comedy improv podcast published at least weekly since 2009. Each episode features one or more guests, who may be playing themselves or an improvised character. Since its inception, there have been 556 episodes with 432 unique guests.
 
 At the end of the year, listeners vote on the best episodes of the year (Thanksgiving-to-Thanksgiving), which are compiled in year-end Best Of episodes that are published over the Christmas-New Year break. Paul F. Tompkins, the most frequent CBB guest, typically cohosts these shows with the show's host, Scott Aukerman.
 
-This year, there was a lot of Scott-and-Paul talk in the Best Ofs about the frequency in which Paul appears in Best Of'd episodes, I decided to test whether this was because Paul makes episodes good, or it he's just in a lot of episodes. To do this, I used the statistical computing package [R](https://www.r-project.org/), alongside the [tidyverse](https://www.tidyverse.org/) and [rvest](https://cran.r-project.org/web/packages/rvest/rvest.pdf) packages.
+This year, there was a lot of Scott-and-Paul talk in the Best Ofs about the frequency in which Paul appears in Best Of'd episodes, I decided to test whether this was because Paul makes episodes good, or it he's just in a lot of episodes. To do this, I used the statistical computing package R, alongside the tidyverse and rvest packages.
 
-I scraped the data directly from the Earwolf website using [this script](https://pastebin.com/an7XdqJy), and then performed the data treatment using [this other script](https://pastebin.com/XfY6BLzn).
-
-[Here is a plot](https://i.imgur.com/3iR3yyl.png) which shows every episode of Comedy Bang Bang, highlighting the Best Of'd episodes, and color-coding the top 9 most frequent guests. You'll notice that the red PFT dot is very frequently highlighted. This is especially true in 2017.
-
-Then, for shits and giggles, I constructed a very simple linear model, where I tried to predict whether an episode was Best Of'd based on which guests (of the guests with a dozen appearances or more) were in the episode. I want to emphasize, **these stats are bad stats and not rigorous.** Don't read too much into them, they're just for fun. 
-
-                   guest  ep bo BO_rate lm_weight            p sig
-    1          Intercept   0  0       0     0.130 9.753301e-08 ***
-    2   Paul F. Tompkins 137 49   0.358     0.231 1.495523e-08 ***
-    3      James Adomian  52  9   0.173    -0.097 8.678391e-02   .
-    4      Lauren Lapkus  43 16   0.372     0.128 3.925047e-02   *
-    5      Neil Campbell  36  9    0.25    -0.009 8.933476e-01    
-    6         Nick Kroll  36 17   0.472     0.261 1.520563e-04 ***
-    7   Jason Mantzoukas  33 22   0.667     0.384 4.150926e-07 ***
-    8          Andy Daly  28 16   0.571     0.245 1.937855e-03  **
-    9           Jon Daly  27  3   0.111    -0.090 2.722079e-01    
-    10      Horatio Sanz  24  4   0.167    -0.119 1.452424e-01    
-    11       Seth Morris  23  2   0.087    -0.211 1.156011e-02   *
-    12        Jon Gabrus  22  6   0.273    -0.067 4.264482e-01    
-    13      Ben Schwartz  21 10   0.476     0.351 5.263073e-05 ***
-    14       Matt Besser  21  2   0.095    -0.112 1.805788e-01    
-    15         Paul Rust  20  5    0.25    -0.046 6.101445e-01    
-    16       Doug Benson  19  2   0.105    -0.100 2.497918e-01    
-    17 Jessica St. Clair  19  7   0.368     0.072 4.233751e-01    
-    18      Mike Hanford  19  6   0.316     0.080 3.965598e-01    
-    19       Drew Tarver  18  5   0.278    -0.029 7.726305e-01    
-    20    Harris Wittels  18  6   0.333     0.103 2.651419e-01    
-    21      Brett Gelman  17  3   0.176     0.026 7.978154e-01    
-    22      Mary Holland  17  4   0.235    -0.097 3.132823e-01    
-    23      Reggie Watts  17  2   0.118    -0.074 4.409942e-01    
-    24     Brendon Small  16  2   0.125    -0.041 6.659318e-01    
-    25       Paul Scheer  15  3     0.2    -0.081 4.112200e-01    
-    26 Weird Al Yankovic  15  2   0.133    -0.085 4.008662e-01    
-    27        Will Hines  15  2   0.133    -0.043 6.608338e-01    
-    28      Bob Odenkirk  12  1   0.083    -0.116 2.894117e-01    
-    29         Ryan Gaul  12  3    0.25     0.011 9.263411e-01    
-    30        Tig Notaro  12  3    0.25     0.084 4.704218e-01    
-
-I also tried experimenting with whether the episode was a special occasion, what day of the week the episode was released on, and how many guests were on the episode. On my first pass, I didn't find any of those variables to be significant predictors of whether an episode was Best Of'd.
-
-The things you'll want to pay attention to in the table are probably the lm_weight column. It suggests that a basic episode, with none of the top 29 guests, has approximately a 13% chance of being Best Of'd. PFT adds 23%, meaning that an episode with only Paul and Scott has a 36% chance of being Best Of'd. If Nick Kroll shows up to the recording, we're up to over 50%.
-
-Using only the guests who correlate very well with Best Of'd episodes, we can attempt to make the most Best Of-y lineup possible: 
-
-**Paul F. Tompkins, Lauren Lapkus, Nick Kroll, Jason Mantzoukas, Andy Daly, and Ben Schwartz**
+I scraped the data directly from the Earwolf website using the cbb-scrape-earwolf.R script, and then performed the data treatment using the cbb-treatment.R script.
