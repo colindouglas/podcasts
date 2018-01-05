@@ -141,7 +141,7 @@ ggplot(cbb) +
   ### Flip the y axis around so earlier is at the top
   scale_y_reverse(breaks=2009:2017, name = "Year", limits=c(max(cbb$year)+5*offset,min(cbb$year)-6*offset)) +
   
-  scale_x_continuous(name = "Day (First Monday = Day 0)", breaks=seq(0, 365, 30)) +
+  scale_x_continuous(name = "Day (Mondays Aligned)", breaks=seq(0, 365, 30)) +
   scale_color_manual("Guests", labels = paste0(top_guests_table$name, " (", top_guests_table$count, ")"), values = colors, guide="legend") +
   
   ### Draw points for each episode, and adjust the transparency based on whether the 
@@ -163,7 +163,7 @@ ggplot(cbb) +
   ### Add a title and a subtitle.
   ggtitle("Top Comedy Bang Bang Guests by Episode", subtitle = "Best Of'd Episodes Highlighted")
 
-ggsave(filename = "cbb-bestof-plot.png", width = 12, height = 10, dpi = 500)
+ggsave(filename = "cbb-bestof-plot.png", width = 12, height = 6, dpi = 500)
 
 # Make a linear model -----------------------------------------------------
 

@@ -1,11 +1,38 @@
 library(rvest)
 library(tidyverse)
 
+### Should we re-collect all of the data from the start episode (TRUE)
+### or just amend the existing data (FALSE)? 
+start_fresh <- FALSE
+
 # Scrape Earwolf ----------------------------------------------------------
 
-### The first episode
-episode <- data.frame()
-next_ep <- "http://www.earwolf.com/episode/welcome-to-comedy-bang-bang/"
+if (start_fresh == TRUE) { 
+  ### Make an empty dataframe
+  episode <- data_frame()
+  
+  ### The first episode
+  next_ep <- "http://www.earwolf.com/episode/welcome-to-comedy-bang-bang/"
+}
+
+if (start_fresh == FALSE) {
+  ### Read in the previously-exported CSV
+  episode <- read_csv("cbb-episodes.csv")
+  
+  ### Split the guests column into vectors
+  strsplit(episode$guests[1], ",")
+  
+  ### Get the URL of the last episode processed
+  last_ep <- tail(episode$url,1)
+  
+  ### Scrape the HTML from the last episode
+  html_scrape <- read_html(last_ep)
+  
+  ### Find the next episode URL
+  next_ep <- html_scrape %>% 
+    html_nodes(".nextepisodelink") %>% 
+    html_attr('href')
+}
 
 while (length(next_ep) > 0) { # The next episode will be character(0) once it gets to the final episode
  ### Scrape the HTML  
@@ -41,7 +68,7 @@ while (length(next_ep) > 0) { # The next episode will be character(0) once it ge
     html_text() 
 
   ### Make a new row with all of the data
-  newrow <- data.frame(date, number, title, url=next_ep, desc)
+  newrow <- data_frame(date, number, title, url=next_ep, desc)
   
   ### Add the guests as a list
   newrow$guests <- list(guest)
@@ -57,3 +84,13 @@ while (length(next_ep) > 0) { # The next episode will be character(0) once it ge
     html_nodes(".nextepisodelink") %>% 
     html_attr('href')
 }
+
+episode_output <- episode
+
+### Convert the guest column to a string (from a list)
+episode_output$guests <- sapply(episode$guests, toString)
+
+### Output the dataframe as a CSV
+write_csv(episode_output, path = "cbb-episodes.csv")
+rm(episode_output)
+
