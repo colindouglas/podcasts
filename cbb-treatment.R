@@ -25,7 +25,7 @@ BOs <- c("B1",29,18,17,12,26,28,15,16,14) %>%                                # 2
   c(300,274,289,286,304,285,312,283,263,272,309,266,265,301,310) %>%         # 2014
   c(356,336,355,338,342,349,378,377,354,365,335,351,327,329) %>%             # 2015
   c(406,416,391,419,429,446,390,425,402,423,401,400,452,456,393) %>%         # 2016
-  c(474,469,489,473,521,514,518,510, 478, 481, 512, 484, 511, 463, 485, 500) # 2017
+  c(474,469,489,473,521,514,518,510,478,481,512,484,511,463,485,500) # 2017
   
 ### Find the year of each episode
 cbb$year <- year(cbb$date)
@@ -161,8 +161,9 @@ ggplot(cbb) +
   geom_segment(color="darkgrey", lty=2, aes(x = 325, y = 2008.5, xend = 325, yend = 2017.5)) +
   
   ### Add a title and a subtitle.
-  ggtitle("Top 9 Comedy Bang Bang Guests by Episode", subtitle = "Best Of'd Episodes Highlighted")
+  ggtitle("Top Comedy Bang Bang Guests by Episode", subtitle = "Best Of'd Episodes Highlighted")
 
+ggsave(filename = "cbb-bestof-plot.png", width = 12, height = 10, dpi = 500)
 
 # Make a linear model -----------------------------------------------------
 
@@ -236,27 +237,6 @@ summary$sig[summary$p < 0.05] <- "*"
 summary$sig[summary$p < 0.01] <- "**"
 summary$sig[summary$p < 0.001] <- "***"
 
-
-guest_count <- data.frame(guest_count = 1:15)
-guest_count$guest_count <- as.character(guest_count$guest_count)
-
-guest_count_freq <- data.frame(table(cbb$guest_count))
-guest_count_freq$Var1 <- as.character(guest_count_freq$Var1)
-
-guest_count_bo <- data.frame(table(cbb$guest_count[cbb$BO == T]))
-guest_count_bo$Var1 <- as.character(guest_count_bo$Var1)
-
-guest_count_all <- left_join(guest_count, guest_count_freq, by = c("guest_count" = "Var1")) %>%
-  left_join(guest_count_bo, by = c("guest_count" = "Var1"))
+write_csv(summary, path="cbb-bestof-lm-summary.csv")
 
 
-guest_count_all$Freq.x[is.na(guest_count_all$Freq.x)] <- 0
-guest_count_all$Freq.y[is.na(guest_count_all$Freq.y)] <- 0
-
-guest_count_all <- mutate(guest_count_all, rate = Freq.y / Freq.x)
-
-ggplot(guest_count_all, aes(x = as.numeric(guest_count), y = rate)) +
-  geom_point() +
-  geom_smooth(method = "lm") +
-  scale_x_continuous(name = "Guests per Episode") +
-  scale_y_continuous(name = "Best Of'd Rate", breaks = seq(0,1,0.25))
