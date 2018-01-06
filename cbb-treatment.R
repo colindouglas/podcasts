@@ -120,32 +120,6 @@ ggplot(cbb) +
     ymin = year - (5*offset), 
     ymax = year + (5*offset)
   )) +
-  # geom_rect(data = filter(cbb, anniversary == T), alpha = 0.3, fill=NA, color=colors[2], aes(
-  #   xmin = SinceMonday - 2, 
-  #   xmax = SinceMonday + 2, 
-  #   ymin = year - (5*offset), 
-  #   ymax = year + (5*offset)
-  # )) +
-  # geom_rect(data = filter(cbb, hundo == T), alpha = 0.3, fill=NA, color=colors[1], aes(
-  #   xmin = SinceMonday - 2, 
-  #   xmax = SinceMonday + 2, 
-  #   ymin = year - (5*offset), 
-  #   ymax = year + (5*offset)
-  # )) +
-  # 
-  # geom_rect(data = filter(cbb, suicide == T), alpha = 0.3, fill=NA, color=colors[5], aes(
-  #   xmin = SinceMonday - 2, 
-  #   xmax = SinceMonday + 2, 
-  #   ymin = year - (5*offset), 
-  #   ymax = year + (5*offset)
-  # )) +
-  # 
-  # geom_rect(data = filter(cbb, live == T), alpha = 0.3, fill=NA, color="black", aes(
-  #   xmin = SinceMonday - 2, 
-  #   xmax = SinceMonday + 2, 
-  #   ymin = year - (5*offset), 
-  #   ymax = year + (5*offset)
-  # )) +
   
   ### Set the transparency of the dots for T/F
   scale_alpha_manual(values = c(0.05,0.8), guide=F) + 
