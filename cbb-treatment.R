@@ -16,6 +16,13 @@ FirstMonday <- function(year) {
   return(as.Date(day)) 
 }
 
+### Define a function to check if a given element is in a column of lists
+### Example: episode$number[in.list("Lauren Lapkus", episode$guests)]
+### returns all of the episode numbers with Lauren Lapkus
+in.list <- function(element, list) {
+  sapply(list, is.element, el = element)
+}
+
 ### Episode numbers of the Best Of'd episodes
 BOs <- c("B1",29,18,17,12,26,28,15,16,14) %>%                                # 2009
   c(34,35,51,59,"BO2009",73,43,76.5,69,51) %>%                               # 2010
@@ -25,7 +32,7 @@ BOs <- c("B1",29,18,17,12,26,28,15,16,14) %>%                                # 2
   c(300,274,289,286,304,285,312,283,263,272,309,266,265,301,310) %>%         # 2014
   c(356,336,355,338,342,349,378,377,354,365,335,351,327,329) %>%             # 2015
   c(406,416,391,419,429,446,390,425,402,423,401,400,452,456,393) %>%         # 2016
-  c(474,469,489,473,521,514,518,510,478,481,512,484,511,463,485,500) # 2017
+  c(474,469,489,473,521,514,518,510,478,481,512,484,511,463,485,500)         # 2017
   
 ### Find the year of each episode
 cbb$year <- year(cbb$date)
@@ -73,11 +80,16 @@ unique_guests <- unique(all_guests)
 
 ### Make a logical column in the data frame for a given guests's appearance in an episode
 ### (this code is bad and should be better but it works)
+# for (i in 1:length(unique_guests)) {
+#   for (j in 1:nrow(cbb)) {
+#     cbb[[unique_guests[i]]][j] <- unique_guests[i] %in% cbb$guests[[j]]
+#   } }
+
+### This code does the same as above but much faster
 for (i in 1:length(unique_guests)) {
-  for (j in 1:nrow(cbb)) {
-    cbb[[unique_guests[i]]][j] <- unique_guests[i] %in% cbb$guests[[j]]
-  } }
-rm(i,j)
+      cbb[[unique_guests[i]]] <- in.list(unique_guests[i], cbb$guests)
+  }
+rm(i)
 
 
 # Make the plot -----------------------------------------------------------
