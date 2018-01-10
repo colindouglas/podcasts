@@ -44,27 +44,11 @@ cbb$year[cbb$number %in% BO_numbers] <- as.numeric(substring(BO_numbers,3,6))
 ### Find the days since the first Monday of the year
 cbb$SinceMonday <- cbb$date - as.Date(sapply(cbb$year, FirstMonday), origin="1970-01-01")
 
-### Find the day of the week the episode was released
-cbb$day <- weekdays(cbb$date)
-
 ### Count the number of guests in each episode
-cbb$guest_count <- sapply(cbb$guests, length)
+cbb$guest_count <- lengths(cbb$guests)
 
 ### Find if the episode was in the Best Ofs
 cbb$BO <- cbb$number %in% BOs
-
-### Find if the episode was a hundo
-cbb$hundo <- as.numeric(as.character(cbb$number)) %% 100 == 0
-cbb$hundo[is.na(cbb$hundo)] <- F
-
-### Find if the episode was an anniversary episode
-cbb$anniversary <- grepl("anniversary", tolower(cbb$title))
-
-### Find if the episode was a Suicide House episode
-cbb$suicide <- grepl("suicide house", tolower(cbb$title)) | grepl("halloween", tolower(cbb$title))
-
-### Find if the episode was a Live episode
-cbb$live <- grepl("live ", tolower(cbb$title))
 
 ### Make a vector of all of the guests
 all_guests <- c()
@@ -79,13 +63,7 @@ for (i in 1:nrow(cbb_bo)) bo_guests <- c(bo_guests, cbb_bo$guests[[i]])
 unique_guests <- unique(all_guests)
 
 ### Make a logical column in the data frame for a given guests's appearance in an episode
-### (this code is bad and should be better but it works)
-# for (i in 1:length(unique_guests)) {
-#   for (j in 1:nrow(cbb)) {
-#     cbb[[unique_guests[i]]][j] <- unique_guests[i] %in% cbb$guests[[j]]
-#   } }
-
-### This code does the same as above but much faster
+### This code does the same as before but much faster
 for (i in 1:length(unique_guests)) {
       cbb[[unique_guests[i]]] <- in.list(unique_guests[i], cbb$guests)
   }
@@ -155,45 +133,16 @@ ggsave(filename = "cbb-bestof-plot.png", width = 12, height = 6, dpi = 500)
 
 ### This is bad and hacked together and is probably bad stats but it's fun.
 ### Don't take it too seriously
-bo_lm <- lm(data=subset(cbb, !grepl("BO", cbb$number)), 
-   BO ~ 
-     get(top_guests[1]) + 
-     get(top_guests[2]) + 
-     get(top_guests[3]) + 
-     get(top_guests[4]) +
-     get(top_guests[5]) + 
-     get(top_guests[6]) + 
-     get(top_guests[7]) +
-     get(top_guests[8]) +
-     get(top_guests[9]) +
-     get(top_guests[10]) +
-     get(top_guests[11]) +
-     get(top_guests[12]) +
-     get(top_guests[13]) +
-     get(top_guests[14]) +
-     get(top_guests[15]) +
-     get(top_guests[16]) +
-     get(top_guests[17]) +
-     get(top_guests[18]) +
-     get(top_guests[19]) +
-     get(top_guests[20]) + 
-     get(top_guests[21]) + 
-     get(top_guests[22]) + 
-     get(top_guests[23]) + 
-     get(top_guests[24]) + 
-     get(top_guests[25]) + 
-     get(top_guests[26]) + 
-     get(top_guests[27]) + 
-     get(top_guests[28]) + 
-     get(top_guests[29])
-   )
-
-### Top x amount of guests into table?
-topx <- 29
+bo_lm <- lm(data = (cbb %>% 
+                      filter(!grepl("BO", cbb$number)) %>%
+                      select(which(colnames(cbb) == "BO"):ncol(cbb))), 
+            BO ~ .)
 
 ### Remake the top list with the right number
-top_guests <- names(sort(table(all_guests), decreasing = T)[1:topx])
-top_guests_table <- data.frame(sort(table(all_guests), decreasing=T)[1:topx])
+top_guests <- names(sort(table(all_guests), decreasing = T))
+top_guests_table <- data.frame(sort(table(all_guests), decreasing=T)) %>%
+  filter(Freq > 4)
+
 names(top_guests_table) <- c("name", "count")
 
 ### Put the LM weights into a data frame
@@ -214,7 +163,7 @@ summary <- mutate(summary, BO_rate = round(bo/ep, 3))
 summary <- rbind(c("Intercept", 0,0,0), summary)
 summary <- left_join(summary, lm_table, by=c("guest" = "name"))
 summary$lm_weight <- round(summary$lm_weight, 3)
-summary$p <- coef(summary(bo_lm))[,4]
+lm_df <- data_frame(coef(summary(bo_lm)[,2:4]))
 
 ### Add significance symbols for quick reference
 summary$sig <- ""

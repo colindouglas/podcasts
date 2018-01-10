@@ -1,89 +1,98 @@
-# Scrape r/earwolf --------------------------------------------------------
-library(httr)
-library(rvest)
+library(RedditExtractoR)
 library(tidyverse)
-### Init dataframe
-reddit <- data_frame()
 
-search_page <- "https://www.reddit.com/r/Earwolf/search"
-user_agent <- "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:57.0) Gecko/20100101 Firefox/57.0"
+### Should we re-collect all of the data (TRUE)
+### or just collect the most recent data (FALSE)? 
+startFresh <- TRUE
 
-session <- html_session(search_page, user_agent(user_agent))
-
-form <- html_form(session)[[3]]
-
-form <- set_values(form, q = "comedy+bang+bang site:earwolf.com", restrict_sr = T, sort = "new")
-
-results <- submit_form(session, form)
-
-reddit_scrape <- read_html(results)
-
-title <- reddit_scrape %>%
-  html_nodes(".search-result-header") %>%
-  html_text()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### The first page
-next_page <- "https://www.reddit.com/r/Earwolf/search?q=comedy%2Bbang%2Bbang+site%3Aearwolf.com&restrict_sr=on&sort=new&t=all?test"
-
-### Set a dummy title so the loop starts
-title <- " "
-
-while (length(title) > 0 ) {
+if (startFresh == FALSE) {
+  ### Read in the previous data scraped from reddit
+  oldRedditEpisodes <- read_csv("cbb_reddit_scrape.csv")
+  ### Find the URL for the most recent post
+  lastURL <- oldRedditEpisodes$rURL[oldRedditEpisodes$rDate == max(oldRedditEpisodes$rDate)]
   
-  ### Start loop
+  pageThreshold <- 0
+  allURLs <- c()
   
-#  download.file(next_page, destfile = 'reddit_scrape.html') #debug
-#  reddit_scrape <- read_html('reddit_scrape.html') #debug
+  ### Keep expanding page threshold of the search until you find the last URL, then stop
+  while (!(lastURL %in% allURLs)) {
+    ### Increase the number of search pages you go back by one
+    pageThreshold <- pageThreshold + 1
+    
+      cbbThreads <- reddit_urls(
+      search_terms = "Comedy Bang Bang site:earwolf.com",
+      subreddit = "Earwolf",
+      page_threshold = pageThreshold,
+      sort_by = "new")
+    
+    cbbThreads2 <- reddit_urls(
+      search_terms = "CBB site:earwolf.com",
+      subreddit = "Earwolf",
+      page_threshold = pageThreshold,
+      sort_by = "new")
+    
+    ### Combine the list of URLs from both search terms, only keep the unique ones
+    allURLs <- unique(c(cbbThreads$URL,cbbThreads2$URL))
+  }
+} else if (startFresh == TRUE) {
   
-  reddit_scrape <- read_html(next_page)
+  ### Just search 100 pages deep
+  oldRedditEpisodes <- data_frame()
+  cbbThreads <- reddit_urls(
+    search_terms = "Comedy Bang Bang site:earwolf.com",
+    subreddit = "Earwolf",
+    page_threshold = 200,
+    sort_by = "new")
   
-  title <- reddit_scrape %>%
-    html_nodes(".search-result-header") %>%
-    html_text()
+  cbbThreads2 <- reddit_urls(
+    search_terms = "CBB site:earwolf.com",
+    subreddit = "Earwolf",
+    page_threshold = 200,
+    sort_by = "new")
   
-  number <- title %>% 
-    str_extract("#[BO0-9.]+|# *[BO0-9.]+|episode [BO0-9.]+|Episode [BO0-9.]+") 
-  
-  url <- reddit_scrape %>%
-    html_nodes(".search-link") %>%
-    html_attr("href")
-  
-  upvotes <- reddit_scrape %>%
-    html_nodes(".search-score") %>%
-    html_text() %>%
-    str_extract("[0-9]+")
-  
-  comments <- reddit_scrape %>%
-    html_nodes(".search-comments") %>%
-    html_text() %>%
-    str_extract("[0-9]+")
-  
-  search_page <- reddit_scrape %>% 
-    html_nodes("a") %>% 
-    html_attr("href") 
-  
-  next_page <- search_page %>% 
-    subset(grepl("after", search_page)) %>%
-    tail(n = 1)
-  
-  newrows <- data_frame(title, upvotes, comments, url)
-  
-  reddit <- reddit %>% rbind(newrows)
-  
+  ### Combine the list of URLs from both search terms, only keep the unique ones
+  allURLs <- unique(c(cbbThreads$URL,cbbThreads2$URL))
 }
 
-episode_reddit <- left_join(episode, reddit[2:4])
+### Get the comment data for all of the URLs you found above
+redditComments <- reddit_content(allURLs)
 
+### Summarize the data
+redditEpisodes <- redditComments %>%
+  ### Only use the data where URL points to earwolf
+  filter(domain == "earwolf.com") %>%
+  ### Interpret the post_date column as a date
+  mutate(post_date = as.Date(post_date, format = "%d-%m-%y")) %>%
+  ### Cut off any of the URL that is after a question mark to improve matching
+  mutate(URL = sub("\\?.*", "", URL)) %>%
+  ### Group by all of the columns that are constant across a given thread
+  group_by(post_date, title, num_comments, upvote_prop, post_score, author, link, URL) %>%
+  ### Summarize, calculate the sum of all of the comment scores
+  summarize(totalCommentScore = sum(comment_score)) %>%
+  ### Arrange in order of date
+  arrange(post_date) %>% 
+  ### Make sure its a tibble
+  as_data_frame()
+
+### Rename the columns, prefix an "r" to clarify that its from reddit data
+names(redditEpisodes) <- c(
+  post_date = "rDate", 
+  title = "rTitle", 
+  num_comments = "rComments", 
+  upvote_prop= "rUpvoteProp", 
+  post_score = "rScore", 
+  author = "rAuthor", 
+  link = "link", 
+  URL = "rURL", 
+  totalCommentScore = "rTotalCommentScore")
+
+### Combine the newly scraped data with the old data
+completeRedditEpisodes <- redditEpisodes %>% 
+  bind_rows(oldRedditEpisodes) %>%
+  ### Keep only the rows with distinct URLs 
+  distinct(rURL, .keep_all = TRUE) %>%
+  ### Sort by date
+  arrange(rDate)
+
+### Write the episode data to a CSV
+write_csv(completeRedditEpisodes, "cbb_reddit_scrape.csv")

@@ -3,25 +3,24 @@ library(tidyverse)
 
 ### Should we re-collect all of the data from the start episode (TRUE)
 ### or just amend the existing data (FALSE)? 
-start_fresh <- FALSE
+startFresh <- FALSE
 
 # Scrape Earwolf ----------------------------------------------------------
 
-if (start_fresh == TRUE) { 
+if (startFresh == TRUE) { 
   ### Make an empty dataframe
   episode <- data_frame()
   
   ### The first episode
-  next_ep <- "http://www.earwolf.com/episode/welcome-to-comedy-bang-bang/"
-}
-
-if (start_fresh == FALSE) {
+  nextEp <- "http://www.earwolf.com/episode/welcome-to-comedy-bang-bang/"
+} else if (startFresh == FALSE) {
+  
   ### Read in the previously-exported CSV
-  episode <- read_csv("cbb-episodes.csv")
+  episode <- read_csv("cbb_earwolf_scrape.csv")
   
   ### Split the guests column into vectors
   episode$guests <- strsplit(episode$guests, ", ")
-
+  
   ### Get the URL of the last episode processed
   last_ep <- tail(episode$url,1)
   
@@ -32,11 +31,11 @@ if (start_fresh == FALSE) {
   next_ep <- html_scrape %>% 
     html_nodes(".nextepisodelink") %>% 
     html_attr('href')
-}
+} 
 
-while (length(next_ep) > 0) { # The next episode will be character(0) once it gets to the final episode
+while (length(nextEp) > 0) { # The next episode will be character(0) once it gets to the final episode
  ### Scrape the HTML  
-  html_scrape <- read_html(next_ep)
+  html_scrape <- read_html(nextEp)
   
   ### Get the episode date
   date <- html_scrape %>%
@@ -68,7 +67,7 @@ while (length(next_ep) > 0) { # The next episode will be character(0) once it ge
     html_text() 
 
   ### Make a new row with all of the data
-  newrow <- data_frame(date, number, title, url=next_ep, desc)
+  newrow <- data_frame(date, number, title, url=nextEp, desc)
   
   ### Add the guests as a list
   newrow$guests <- list(guest)
@@ -91,6 +90,7 @@ episode_output <- episode
 episode_output$guests <- sapply(episode$guests, toString)
 
 ### Output the dataframe as a CSV
-write_csv(episode_output, path = "cbb-episodes.csv")
+write_csv(episode_output, path = "cbb_earwolf_scrape.csv")
 rm(episode_output)
+
 
