@@ -35,19 +35,20 @@ if (startFresh == FALSE) {
     allURLs <- unique(c(cbbThreads$URL,cbbThreads2$URL))
   }
 } else if (startFresh == TRUE) {
-  
-  ### Just search 100 pages deep
+  ### Clear out any previously scraped data
   oldRedditEpisodes <- data_frame()
-  cbbThreads <- reddit_urls(
+  
+  ### Search 100 pages deep, that should about do it
+    cbbThreads <- reddit_urls(
     search_terms = "Comedy Bang Bang site:earwolf.com",
     subreddit = "Earwolf",
-    page_threshold = 200,
+    page_threshold = 100,
     sort_by = "new")
   
   cbbThreads2 <- reddit_urls(
     search_terms = "CBB site:earwolf.com",
     subreddit = "Earwolf",
-    page_threshold = 200,
+    page_threshold = 100,
     sort_by = "new")
   
   ### Combine the list of URLs from both search terms, only keep the unique ones
