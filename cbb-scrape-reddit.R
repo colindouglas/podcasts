@@ -3,7 +3,7 @@ library(tidyverse)
 
 ### Should we re-collect all of the data (TRUE)
 ### or just collect the most recent data (FALSE)? 
-startFresh <- TRUE
+startFresh <- FALSE
 
 if (startFresh == FALSE) {
   ### Read in the previous data scraped from reddit
