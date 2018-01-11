@@ -70,8 +70,6 @@ redditEpisodes <- redditComments %>%
   group_by(post_date, title, num_comments, upvote_prop, post_score, author, link, URL) %>%
   ### Summarize, calculate the sum of all of the comment scores
   summarize(totalCommentScore = sum(comment_score)) %>%
-  ### Arrange in order of date
-  arrange(post_date) %>% 
   ### Make sure its a tibble
   as_data_frame()
 
