@@ -1,5 +1,6 @@
 library(tidyverse)
 library(tidytext)
+library(corrplot)
 
 ### Read in the collection of reddit comments on CBB threads
 redditComments <- read_csv("data/reddit_comments_scape.csv") %>%
@@ -65,4 +66,4 @@ redditComments %>%
 redditComments %>%
   group_by() %>%
   select_if(is.numeric) %>%
-  cor() %>% corrplot(method = "ellipse")
+  cor() %>% corrplot(method = "ellipse", type = "upper")
