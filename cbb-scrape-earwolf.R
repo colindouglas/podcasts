@@ -16,7 +16,7 @@ if (startFresh == TRUE) {
 } else if (startFresh == FALSE) {
   
   ### Read in the previously-exported CSV
-  episode <- read_csv("cbb_earwolf_scrape.csv")
+  episode <- read_csv("data/cbb_earwolf_scrape.csv")
   
   ### Split the guests column into vectors
   episode$guests <- strsplit(episode$guests, ", ")
@@ -90,7 +90,7 @@ episode_output <- episode
 episode_output$guests <- sapply(episode$guests, toString)
 
 ### Output the dataframe as a CSV
-write_csv(episode_output, path = "cbb_earwolf_scrape.csv")
+write_csv(episode_output, path = "data/cbb_earwolf_scrape.csv")
 rm(episode_output)
 
 

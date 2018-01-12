@@ -18,11 +18,11 @@ in.list <- function(element, list) {
 }
 
 ### Read in the Best Of episode data, and pull the episode numbers
-BOs <- read_csv("cbb-bestof-episodes.csv") %>%
+BOs <- read_csv("data/cbb_bestof_episodes.csv") %>%
   pull(number)
   
 ### Read in the episode data scraped from Earwolf
-cbb <- read_csv("cbb_earwolf_scrape.csv") %>% 
+cbb <- read_csv("data/cbb_earwolf_scrape.csv") %>% 
   mutate(guests = strsplit(guests, ", ")) %>%
   mutate(year = year(date), guest_count = lengths(guests)) %>%
   mutate(BO = number %in% BOs)
@@ -111,4 +111,4 @@ ggplot(cbb) +
   ### Add a title and a subtitle.
   ggtitle("Top Comedy Bang Bang Guests by Episode", subtitle = "Best Of'd Episodes Highlighted")
 
-ggsave(filename = "cbb-bestof-plot.png", width = 12, height = 6, dpi = 500)
+ggsave(filename = "data/cbb-bestof-plot.png", width = 12, height = 6, dpi = 500)
