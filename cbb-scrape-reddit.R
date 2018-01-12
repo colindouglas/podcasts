@@ -3,13 +3,15 @@ library(tidyverse)
 
 ### Should we re-collect all of the data (TRUE)
 ### or just collect the most recent data (FALSE)? 
-startFresh <- TRUE
+startFresh <- FALSE
 
 if (startFresh == FALSE) {
   ### Read in the previous data scraped from reddit
-  oldRedditEpisodes <- read_csv("cbb_reddit_scrape.csv")
+  oldRedditEpisodes <- read_csv("cbb_reddit_scrape.csv") %>%
+    mutate(date = as.Date(date, format = "%m/%d/%Y"))
+  
   ### Find the URL for the most recent post
-  lastURL <- oldRedditEpisodes$rURL[oldRedditEpisodes$rDate == max(oldRedditEpisodes$rDate)]
+  lastURL <- oldRedditEpisodes$URL[oldRedditEpisodes$date == max(oldRedditEpisodes$date)]
   
   pageThreshold <- 0
   allURLs <- c()
@@ -18,8 +20,10 @@ if (startFresh == FALSE) {
   while (!(lastURL %in% allURLs)) {
     ### Increase the number of search pages you go back by one
     pageThreshold <- pageThreshold + 1
+    ### For debug
+    print(paste("Page Threshold:", pageThreshold))
     
-      cbbThreads <- reddit_urls(
+    cbbThreads <- reddit_urls(
       search_terms = "Comedy Bang Bang site:earwolf.com",
       subreddit = "Earwolf",
       page_threshold = pageThreshold,
@@ -58,6 +62,8 @@ if (startFresh == FALSE) {
 ### Get the comment data for all of the URLs you found above
 redditComments <- reddit_content(allURLs)
 
+if(startFresh == TRUE) write_csv(redditComments, "reddit_comments_scape.csv")
+
 ### Summarize the data
 redditEpisodes <- redditComments %>%
   ### Only use the data where URL points to earwolf
@@ -73,25 +79,25 @@ redditEpisodes <- redditComments %>%
   ### Make sure its a tibble
   as_data_frame()
 
-### Rename the columns, prefix an "r" to clarify that its from reddit data
+### Rename the columns
 names(redditEpisodes) <- c(
-  post_date = "rDate", 
-  title = "rTitle", 
-  num_comments = "rComments", 
-  upvote_prop= "rUpvoteProp", 
-  post_score = "rScore", 
-  author = "rAuthor", 
+  post_date = "date", 
+  title = "title", 
+  num_comments = "comments", 
+  upvote_prop= "ppvoteProp", 
+  post_score = "score", 
+  author = "author", 
   link = "link", 
-  URL = "rURL", 
-  totalCommentScore = "rTotalCommentScore")
+  URL = "URL", 
+  totalCommentScore = "totalCommentScore")
 
 ### Combine the newly scraped data with the old data
 completeRedditEpisodes <- redditEpisodes %>% 
   bind_rows(oldRedditEpisodes) %>%
   ### Keep only the rows with distinct URLs 
-  distinct(rURL, .keep_all = TRUE) %>%
+  distinct(URL, .keep_all = TRUE) %>%
   ### Sort by date
-  arrange(rDate)
+  arrange(date)
 
 ### Write the episode data to a CSV
 write_csv(completeRedditEpisodes, "cbb_reddit_scrape.csv")
