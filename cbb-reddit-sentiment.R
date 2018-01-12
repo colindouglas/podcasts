@@ -13,7 +13,7 @@ redditComments <- read_csv("data/reddit_comments_scape.csv") %>%
   ### Split the comment field into separate rows for each word
   unnest_tokens(word, comment) %>%
   
-  ### Find the sentiment of each word using the "bing" unigram list
+  ### Find the sentiment of each word using the "afinn" unigram list
   left_join(get_sentiments("afinn")) %>%
   mutate(sentiment = score) %>%
   
