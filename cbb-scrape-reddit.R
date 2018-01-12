@@ -7,7 +7,7 @@ startFresh <- FALSE
 
 if (startFresh == FALSE) {
   ### Read in the previous data scraped from reddit
-  oldRedditEpisodes <- read_csv("cbb_reddit_scrape.csv") %>%
+  oldRedditEpisodes <- read_csv("data/cbb_reddit_scrape.csv") %>%
     mutate(date = as.Date(date, format = "%m/%d/%Y"))
   
   ### Find the URL for the most recent post
@@ -62,7 +62,7 @@ if (startFresh == FALSE) {
 ### Get the comment data for all of the URLs you found above
 redditComments <- reddit_content(allURLs)
 
-if(startFresh == TRUE) write_csv(redditComments, "reddit_comments_scape.csv")
+if(startFresh == TRUE) write_csv(redditComments, "data/reddit_comments_scape.csv")
 
 ### Summarize the data
 redditEpisodes <- redditComments %>%
@@ -100,4 +100,4 @@ completeRedditEpisodes <- redditEpisodes %>%
   arrange(date)
 
 ### Write the episode data to a CSV
-write_csv(completeRedditEpisodes, "cbb_reddit_scrape.csv")
+write_csv(completeRedditEpisodes, "data/cbb_reddit_scrape.csv")

@@ -45,4 +45,4 @@ cbbBestOf <- data_frame(
     rank = 1:16,
     number = c(500,485,463,511,484,512,481,478,510,518,514,521,473,489,469,474))) 
 
-write_csv(cbbBestOf, "cbb-bestof-episodes.csv")
+write_csv(cbbBestOf, "data/cbb_bestof_episodes.csv")
