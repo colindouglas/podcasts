@@ -12,7 +12,7 @@ if (startFresh == TRUE) {
   episode <- data_frame()
   
   ### The first episode
-  nextEp <- "http://www.earwolf.com/episode/welcome-to-comedy-bang-bang/"
+  next_ep <- "http://www.earwolf.com/episode/welcome-to-comedy-bang-bang/"
 } else if (startFresh == FALSE) {
   
   ### Read in the previously-exported CSV
@@ -33,9 +33,9 @@ if (startFresh == TRUE) {
     html_attr('href')
 } 
 
-while (length(nextEp) > 0) { # The next episode will be character(0) once it gets to the final episode
+while (length(next_ep) > 0) { # The next episode will be character(0) once it gets to the final episode
  ### Scrape the HTML  
-  html_scrape <- read_html(nextEp)
+  html_scrape <- read_html(next_ep)
   
   ### Get the episode date
   date <- html_scrape %>%
@@ -67,7 +67,7 @@ while (length(nextEp) > 0) { # The next episode will be character(0) once it get
     html_text() 
 
   ### Make a new row with all of the data
-  newrow <- data_frame(date, number, title, url=nextEp, desc)
+  newrow <- data_frame(date, number, title, url=next_ep, desc)
   
   ### Add the guests as a list
   newrow$guests <- list(guest)
