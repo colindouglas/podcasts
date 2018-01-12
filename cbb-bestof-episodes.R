@@ -1,3 +1,5 @@
+### Episodes in the best of, in order, #1 at the start of the vector and descending from there
+
 cbbBestOf <- data_frame(
   year = 2009, 
   rank = 1:10, 
