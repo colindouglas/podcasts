@@ -27,7 +27,7 @@ redditComments <- read_csv("data/reddit_comments_scape.csv") %>%
   ### Group by the fields that are unique to each comment
   group_by(post_date, link, post_score, upvote_prop, structure, URL) %>%
   
-  ### Attempt to classify each comment as positive (+1) or negative (-1), and count the words in each
+  ### Calculate the sentiment of each comment through the sum of the sentiment of all the words, also count the number of words in the comment
   summarize(sentiment = sum(sentiment, na.rm = TRUE), words = n()) %>%
   
   ### Group by the fields that are unique to each thread
