@@ -62,6 +62,9 @@ if (startFresh == FALSE) {
 ### Get the comment data for all of the URLs you found above
 redditComments <- reddit_content(allURLs)
 
+### Tidy up the episode URL
+
+
 if(startFresh == TRUE) write_csv(redditComments, "data/reddit_comments_scape.csv")
 
 ### Summarize the data
@@ -84,7 +87,7 @@ names(redditEpisodes) <- c(
   post_date = "date", 
   title = "title", 
   num_comments = "comments", 
-  upvote_prop= "ppvoteProp", 
+  upvote_prop= "upvoteProp", 
   post_score = "score", 
   author = "author", 
   link = "link", 
@@ -98,6 +101,8 @@ completeRedditEpisodes <- redditEpisodes %>%
   distinct(URL, .keep_all = TRUE) %>%
   ### Sort by date
   arrange(date)
+
+
 
 ### Write the episode data to a CSV
 write_csv(completeRedditEpisodes, "data/cbb_reddit_scrape.csv")
