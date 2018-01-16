@@ -33,8 +33,9 @@ token <- oauth2.0_token(
 
 # End of API setup --------------------------------------------------------
 
+### Function to make search calls to the API to find all of the relevant threads
 SearchEarwolfSubreddit <- function(searchTerm) {
-  
+#  searchTerm <- "comedy+bang+bang" #debug
   ### The initial API call to get search results
   initialURL <- paste0("https://oauth.reddit.com/r/Earwolf/search.json?q=", searchTerm, "+site%3Aearwolf.com&sort=new&type=link&restrict_sr=TRUE&t=all&raw_json=1&limit=100")
 
@@ -43,20 +44,7 @@ SearchEarwolfSubreddit <- function(searchTerm) {
                   user_agent("Earwolf Comment Scraper"),
                   config(token = token)) %>% content()
 
-  ### Extract the data from the parsed JSON response into a dataframe
-  threads <- data_frame(
-    datetime = anytime::anytime(map_dbl(response$data$children, ~ .x$data$created)),
-    title = map(response$data$children, ~ .x$data$title),
-    link = map(response$data$children, ~ .x$data$url),
-    fullname = map(response$data$children, ~ .x$data$name),
-    gilded = map(response$data$children, ~ .x$data$gilded),
-    poster = map(response$data$children, ~ .x$data$author),
-    score = map(response$data$children, ~ .x$data$score),
-    upvotes = map(response$data$children, ~ .x$data$ups),
-    downvotes = map(response$data$children, ~ .x$data$downs),
-    permalink = map(response$data$children, ~ .x$data$permalink),
-    numComments = map(response$data$children, ~ .x$data$num_comments)
-  )
+  threads <- map_dfr(response$data$children, ~flatten(.$data))
 
   ### Print status update
   searchPage <- 1
@@ -74,7 +62,7 @@ SearchEarwolfSubreddit <- function(searchTerm) {
     Sys.sleep(1.1)
 
     ### Get the fullname of the last thread in the search results
-    lastThread <- tail(threads$fullname, n = 1L)
+    lastThread <- tail(threads$name, n = 1L)
 
     ### Append the last thread fullname to the search URL
     nextURL <- paste0(initialURL, "&after=", lastThread)
@@ -85,121 +73,75 @@ SearchEarwolfSubreddit <- function(searchTerm) {
                     config(token = token)) %>% content()
 
     ### Extract the data
-    newThreads <- data_frame(
-      datetime = anytime::anytime(map_dbl(response$data$children, ~ .x$data$created)),
-      title = map(response$data$children, ~ .x$data$title),
-      link = map(response$data$children, ~ .x$data$url),
-      fullname = map(response$data$children, ~ .x$data$name),
-      gilded = map(response$data$children, ~ .x$data$gilded),
-      poster = map(response$data$children, ~ .x$data$author),
-      score = map(response$data$children, ~ .x$data$score),
-      upvotes = map(response$data$children, ~ .x$data$ups),
-      downvotes = map(response$data$children, ~ .x$data$downs),
-      permalink = map(response$data$children, ~ .x$data$permalink),
-      numComments = map(response$data$children, ~ .x$data$num_comments)
-    )
+    newThreads <- map_dfr(response$data$children, ~flatten(.$data))
     
-
     ### Combine the old data with the new
     threads <- bind_rows(threads, newThreads)
   }
   print(paste("Done searching for", searchTerm, "after", searchPage, "pages"))
   return(threads)
 }
+
+### Function to get all of the comments given a thread ID
 GetComments <- function(threadID) {
-  
-  ### Construct the API request to get all of the comment IDs of a thread
   threadURL <- paste0("https://oauth.reddit.com/r/Earwolf/comments/", substring(threadID,4), ".json")
+  print(paste("Fetching thread", threadID))
   
-  ### Make an API call to get all of the info in the thread
+  ### Pause to respect API rules
+  Sys.sleep(1.1)
+
+  ### Get all of the information on the thread
   threadResponse <- GET(threadURL,
                         user_agent("Earwolf Comment Scraper"),
-                        config(token = token)) %>% content() %>% unlist()
+                        config(token = token)) %>% content()
   
-  ### A hacky way to find all of the comments in the thread
-  allCommentIDs <- threadResponse[grepl("data\\.id", names(threadResponse))]
-  
-  redditComments <- data_frame()
-  ### Get the info on all of the comment IDs we just found
- # for (i in 2:length(allCommentIDs)) {
-  for (i in 2:5) {
-    
-    print(paste("Getting comment", allCommentIDs[i], i-1, "of", length(allCommentIDs)-1))
-    ### Wait to response the API results
-    Sys.sleep(1.1)
-    
-    ### Construct the API call using the comment ID
-    commentURL <- paste0("https://oauth.reddit.com/r/Earwolf/api/info.json?id=t1_", allCommentIDs[i])
-    
-    ### Make the API call to get info on the comment
-    commentResponse <- GET(commentURL,
-                           user_agent("Earwolf Comment Scraper"),
-                           config(token = token)) %>% content()
-    
-    ### Parse the data out of the response
-    newComment <- data_frame(
-      datetime = anytime::anytime(commentResponse$data$children[[1]]$data$created),
-      commentID = commentResponse$data$children[[1]]$data$name,
-      threadID = commentResponse$data$children[[1]]$data$link_id,
-      parentID = commentResponse$data$children[[1]]$data$parent_id,
-      author = commentResponse$data$children[[1]]$data$author,
-      score = commentResponse$data$children[[1]]$data$score,
-      text = commentResponse$data$children[[1]]$data$body,
-      gilded = commentResponse$data$children[[1]]$data$gilded
-    )
-
-    redditComments <- bind_rows(redditComments, newComment)
+    CountReplies <- function(x) { 
+    if (length(x$data$replies) == 1) {
+      return(0)
+    } else {
+      return(length(x$data$replies$data$children))
+    }
   }
-  return(redditComments)
-}
-PossLength <- possibly(length, otherwise = 0)
+  
+  WithoutReplies <- function(x) {
+    output <- x[-which(names(x) == "replies")]
+    output[lengths(output) == 0] <- NA
+    output <- lapply(output, as.character)
+    return(output)
+  }
+  
+  InspectReplies <- function(y) {
+    allComments <- data_frame()
+    
+    rInspectReplies <- function(endsInIndex) {
+      if (CountReplies(endsInIndex) > 0) {
+        allComments <- bind_rows(allComments, map_dfr(endsInIndex$data$replies$data$children, ~ WithoutReplies(.$data)))
+        allComments <- bind_rows(allComments, map_dfr(endsInIndex$data$replies$data$children, ~ rInspectReplies(.)))
+      }
+      return(as.data.frame(allComments))
+    }
+    return(rInspectReplies(y))
+  }
+  
+  childComments <- map_dfr(threadResponse[[2]]$data$children, ~ InspectReplies(.))    # Get all of the child(second-or-deeper) comments
+  topComments <- map_dfr(threadResponse[[2]]$data$children, ~ WithoutReplies(.$data)) # Get all the top levels
+  
+  allComments <- bind_rows(topComments, childComments) # Join the top and child comments
+  return(allComments)
+} 
 
 ### Get all of the threads that have "CBB" or "comedy bang bang" in the title
-redditThreads <- SearchEarwolfSubreddit("comedy+bang+bang") %>%
-  bind_rows(SearchEarwolfSubreddit("CBB")) %>%
-  distinct(fullname, .keep_all = TRUE)
+searchTerms <- c("comedy+bang+bang", "cBB")
 
+redditThreads <- map_dfr(searchTerms, ~ SearchEarwolfSubreddit(.)) %>%
+  distinct(name, .keep_all = TRUE) %>%
+  select(-images)
 
-### Start comment scraping
+### Output the reddit thread data to a CSV
+write_csv(redditThreads, path = "data/cbb_reddit_scrape.csv")
 
-redditComments <- GetComments(redditThreads$fullname[1])
+### Get all of the comments on all of the reddit threads you just scraped
+allComments <- map_dfr(redditThreads$name, ~ GetComments(.))
 
-threadID <- redditThreads$fullname[1]
-
-### Construct the API request to get all of the comment IDs of a thread
-threadURL <- paste0("https://oauth.reddit.com/r/Earwolf/comments/", substring(threadID,4), ".json")
-
-### Make an API call to get all of the info in the thread
-threadResponse <- GET(threadURL,
-                      user_agent("Earwolf Comment Scraper"),
-                      config(token = token)) %>% content()
-
-topLevelComments <- data_frame(
-  commentID = map(threadResponse[[2]]$data$children, ~ .$data$name),
-  level = 1,
-  levelNumber = 1:length(map(threadResponse[[2]]$data$children, ~ .$data$name)),
-  datetime = anytime::anytime(map_dbl(threadResponse[[2]]$data$children, ~ .$data$created)),
-  linkID = map(threadResponse[[2]]$data$children, ~ .$data$link_id),
-  parentID = map(threadResponse[[2]]$data$children, ~ .$data$parent_id),
-  replies = map(threadResponse[[2]]$data$children, ~ PossLength(.$data$replies$data$children)),
-  author = map(threadResponse[[2]]$data$children, ~ .$data$author),
-  gilded = map(threadResponse[[2]]$data$children, ~ .$data$gilded),
-  text = map(threadResponse[[2]]$data$children, ~ .$data$body),
-  score = map(threadResponse[[2]]$data$children, ~ .$data$score),
-  permalink = map(threadResponse[[2]]$data$children, ~ .$data$permalink)
-)
-
-
-modify_depth(threadResponse, 3)
-
-
-
-
-map2(commentsWithReplies$levelNumber
-
-str(threadResponse[[2]]$data$children[[3]]$data$replies$data$children[[1]]$data, max.level = 2) ## Second level
-
-str(threadResponse[[2]]$data$children[[3]]$data$replies$data$children[[1]]$data$replies$data$children[[1]]$data, max.level = 2) ## third level
-
-str(threadResponse[[2]]$data$children[[3]]$data$replies$data$children[[1]]$data$replies$data$children[[1]]$data$replies$data$children[[1]]$data, max.level = 2) ## fourth level
-
+### Output the comment data to a CSV
+write_csv(allComments, path = "data/cbb_reddit_comments_scrape.csv")
