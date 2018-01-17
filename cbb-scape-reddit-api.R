@@ -12,13 +12,13 @@ redditThreads <- map_dfr(searchTerms, ~ SearchSubreddit(., subreddit = "Earwolf"
   distinct(name, .keep_all = TRUE) 
 
 ### Output the reddit thread data to a CSV
-write_csv(redditThreads, path = "data/cbb_reddit_scrape.csv")
+write_csv(redditThreads, path = "data/cbb_reddit_threads.csv")
 
 ### Get all of the comments on all of the reddit threads you just scraped
-allComments <- map_dfr(redditThreads$name[1:5], ~ GetComments(., subreddit = "Earwolf"))
+allComments <- map_dfr(redditThreads$name, ~ GetComments(., subreddit = "Earwolf"))
 
 ### Output the comment data to a CSV
-write_csv(allComments, path = "data/cbb_reddit_comments_scrape.csv")
+write_csv(allComments, path = "data/cbb_reddit_comments.csv")
 
 ?SearchSubreddit
 ?RedditAuth
