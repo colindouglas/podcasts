@@ -17,6 +17,7 @@ usefulVars <- c("domain", "subreddit_id", "subreddit", "selftext", "link_flair_t
                 "url", "title", "ups", "num_comments", "is_self")
 
 
+
 ### Call "screddr::SearchSubreddit" for each of the terms in the Earwolf subreddit, keep only the write ones
 scrapedThreads <- map_dfr(searchTerms, ~ SearchSubreddit(., subreddit = "Earwolf")) %>%
   distinct(name, .keep_all = TRUE)  %>%
