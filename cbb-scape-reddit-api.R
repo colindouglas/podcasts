@@ -25,14 +25,14 @@ scrapedThreads <- map_dfr(searchTerms, ~ SearchSubreddit(., subreddit = "Earwolf
 
 
 ### Read in the previously saved data, combine it with the new data, and calculate each thread's age
-allThreads <- read_csv("data/cbb_reddit_threads.csv") %>%
+allThreads <- read_csv("data/cbb_reddit_threads.csv", col_types = RedditColTypes("thread")) %>%
   select(usefulVars) %>%
   bind_rows(scrapedThreads) %>%
   distinct(name, .keep_all = TRUE) %>%
-  mutate(age = as.numeric(Sys.Date()) - as.numeric(created)/60/60/24)
+  mutate(age = Sys.Date() - as.Date(anytime::anytime(created)))
 
 ### Load in previously cached comments
-cachedComments <- read_csv("data/cbb_reddit_comments.csv", col_types = cols(.default = "c"))
+cachedComments <- read_csv("data/cbb_reddit_comments.csv", col_types = RedditColTypes("comment"))
 uniqueThreads <- unique(cachedComments$link_id)
 
 ### Find all of the thread names that aren't in the "link_ids" column of the cached comments
@@ -46,13 +46,13 @@ refreshThreads <- allThreads %>%
 ### The threads that need updating are the threads that have never been scraped plus the newer threads
 threadList <- c(unscrapedThreads, refreshThreads)
 
+### Get all the comments on the threads that need to be scraped in "threadList"
 newComments <- map_dfr(threadList, ~ GetComments(., subreddit = "Earwolf"))
 
-
+### Combine the cached comments with the newly scraped comments
 allComments <- newComments %>%
   bind_rows(cachedComments) %>%
-  distinct(name, .keep_all = TRUE) %>%
-  type_convert()
+  distinct(name, .keep_all = TRUE) 
 
 ### Output all of the data for quicker access in the future
 write_csv(allThreads, path = "data/cbb_reddit_threads.csv")
