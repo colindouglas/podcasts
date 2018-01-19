@@ -20,13 +20,11 @@ usefulVars <- c("domain", "subreddit_id", "subreddit", "selftext", "link_flair_t
 
 ### Call "screddr::SearchSubreddit" for each of the terms in the Earwolf subreddit, keep only the write ones
 scrapedThreads <- map_dfr(searchTerms, ~ SearchSubreddit(., subreddit = "Earwolf")) %>%
-  distinct(name, .keep_all = TRUE)  %>%
-  select(usefulVars)
+  distinct(name, .keep_all = TRUE)
 
 
 ### Read in the previously saved data, combine it with the new data, and calculate each thread's age
 allThreads <- read_csv("data/cbb_reddit_threads.csv", col_types = RedditColTypes("thread")) %>%
-  select(usefulVars) %>%
   bind_rows(scrapedThreads) %>%
   distinct(name, .keep_all = TRUE) %>%
   mutate(age = Sys.Date() - as.Date(anytime::anytime(created)))
