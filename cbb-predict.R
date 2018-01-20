@@ -15,7 +15,7 @@ FirstMonday <- function(year) {
 ### Define a function to check if a given value is in a vector of lists
 ### Example: episode$number[InList("Lauren Lapkus", episode$guests)]
 ### returns all of the episode numbers with Lauren Lapkus
-InList <- function(value, list) {
+in_list <- function(value, list) {
   sapply(list, is.element, el = value)
 }
 
@@ -25,78 +25,49 @@ CheckRedirect <- function(url) {
 }
 
 ### Read in some data
-earwolfData <- read_csv("data/cbb_earwolf_scrape.csv")
-bestOf <- read_csv("data/cbb_bestof_episodes.csv")
-redditSentiment <- read_csv("data/cbb_reddit_sentiment.csv")
+earwolf_data <- read_csv("data/cbb_earwolf_scrape.csv") %>%
+  mutate(guests = strsplit(guests, ", "))
+bestof_data <- read_csv("data/cbb_bestof_episodes.csv")
+sentiment_data <- read_csv("data/cbb_reddit_sentiment.csv")
 
-unmatchedLinks <- redditSentiment %>%
-  anti_join(earwolfData, by=c("link" = "url"))
+unmatched_links <- sentiment_data %>%
+  anti_join(earwolf_data, by=c("url" = "url"))
 
-### Clean up episode URLs to a consistent format
-unmatchedLinks$link <- gsub("http://earwolf.com", 
-                             "http://www.earwolf.com", 
-                            unmatchedLinks$link)
+unmatched_links <- unmatched_links %>%
+  mutate(url = gsub("http://earwolf.com", "http://www.earwolf.com", unmatched_links$url)) %>%
+  rowwise %>%
+  mutate(url = CheckRedirect(url))
 
 ### Check if any of the URLs are redirects, get the URL it redirects to instead
-unmatchedLinks$link <- sapply(unmatchedLinks$link, CheckRedirect)
 
-redditSentimentFixed <- redditSentiment %>%
-  bind_rows(unmatchedLinks)
-  
-
-### Join all of the data into the same dataframe
-allData <- earwolfData %>%
-  left_join(bestOf, by = c("number" = "number")) %>%
-  select(-year) %>%
-  rename(boRank = rank) %>%
-  mutate(bo = number %in% bestOf$number) %>%
-  left_join(redditSentimentFixed, by = c("url" = "link"))
-
-
-
-
-
-ggplot(allData, aes(bo, log(1-upvote_prop))) + geom_boxplot()
-
-
-
-
-
-
-### Find the year of each episode
-cbb$year <- year(cbb$date)
-
-### Fix the year if the Best Of episodes leaked into the following year
-BO_numbers <- as.character(cbb$number[grepl("BO", cbb$number)])
-cbb$year[cbb$number %in% BO_numbers] <- as.numeric(substring(BO_numbers,3,6))
-
-### Find the days since the first Monday of the year
-cbb$SinceMonday <- cbb$date - as.Date(sapply(cbb$year, FirstMonday), origin="1970-01-01")
-
-### Count the number of guests in each episode
-cbb$guest_count <- lengths(cbb$guests)
-
-### Find if the episode was in the Best Ofs
-cbb$BO <- cbb$number %in% BOs
+combined_data <- sentiment_data %>%
+  bind_rows(unmatched_links) %>%
+  left_join(earwolf_data, ., by = c("url" = "url")) %>%
+  left_join(bestof_data, by = c("number" = "number")) %>%
+  mutate(BOrank = rank) %>%
+  select(-year, rank) %>%
+  mutate(BO = number %in% unique(bestof_data$number))
 
 ### Make a vector of all of the guests
-all_guests <- c()
-for (i in 1:nrow(cbb)) all_guests <- c(all_guests, cbb$guests[[i]])
-
-### Make a vector of all of the guests in the bestof eps
-bo_guests <- c()
-cbb_bo <- subset(cbb, BO == T)
-for (i in 1:nrow(cbb_bo)) bo_guests <- c(bo_guests, cbb_bo$guests[[i]])
+all_guests <- unlist(combined_data$guests)
 
 ### Make a vector of only the unique guests
 unique_guests <- unique(all_guests)
 
-### Make a logical column in the data frame for a given guests's appearance in an episode
-### This code does the same as before but much faster
+predict_data <- combined_data %>%
+  select(date, number, guests, score, num_comments, age, wrSent, words, sentiment, upvotes, avgCommentLength, totalComments, positiveComments, negativeComments, neutralComments, rSent, BOrank, BO)
+
+## Make a logical column in the data frame for a given guests's appearance in an episode
+## This code does the same as before but much faster
 for (i in 1:length(unique_guests)) {
-      cbb[[unique_guests[i]]] <- in.list(unique_guests[i], cbb$guests)
+  predict_data[[unique_guests[i]]] <- in_list(unique_guests[i], predict_data$guests)
   }
 rm(i)
+
+predict_data <- select(predict_data, -guests, -date, -number, -BOrank)
+
+model <- glm(BO ~ ., data = predict_data)
+summary(model)
 
 
 # Make the plot -----------------------------------------------------------
