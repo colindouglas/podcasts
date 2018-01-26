@@ -24,6 +24,15 @@ CheckRedirect <- function(url) {
   return(httr::GET(url)$url)
 }
 
+flatten_time <- function(x = created, y) {
+  x <- as.numeric(x)
+  lm <- lm(y ~ x)
+  b <- summary(lm)$coefficients[1]
+  m <- summary(lm)$coefficients[2]
+  normed_y <- y - (x * m + b)
+  return(normed_y)
+}
+
 ### Read in some data
 earwolf_data <- read_csv("data/cbb_earwolf_scrape.csv") %>%
   mutate(guests = strsplit(guests, ", "))
@@ -50,24 +59,47 @@ combined_data <- sentiment_data %>%
 
 ### Make a vector of all of the guests
 all_guests <- unlist(combined_data$guests)
+ 
+### Find the top 20 guests (keeping ties)
+top_guests <- all_guests %>%
+  data_frame(guest = .) %>%
+  group_by(guest) %>%
+  tally() %>%
+  top_n(20) %>%
+  arrange(desc(n)) %>%
+  pull(guest)
 
-### Make a vector of only the unique guests
-unique_guests <- unique(all_guests)
-
+### Select the data that we will feed into the model
 predict_data <- combined_data %>%
-  select(date, number, guests, score, num_comments, age, wrSent, words, sentiment, upvotes, avgCommentLength, totalComments, positiveComments, negativeComments, neutralComments, rSent, BOrank, BO)
+  rowwise() %>%
+  mutate(nScore = flatten_time(created, score)) %>%
+  select(date, number, guests, num_comments, 
+         tail, wrSent, words, sentiment, upvotes, 
+         avgCommentLength, totalComments, positiveComments, 
+         negativeComments, neutralComments, rSent, BOrank, BO)
+
+
 
 ## Make a logical column in the data frame for a given guests's appearance in an episode
-## This code does the same as before but much faster
-for (i in 1:length(unique_guests)) {
-  predict_data[[unique_guests[i]]] <- in_list(unique_guests[i], predict_data$guests)
-  }
+for (i in 1:length(top_guests)) predict_data[[top_guests[i]]] <- in_list(top_guests[i], predict_data$guests)
 rm(i)
 
-predict_data <- select(predict_data, -guests, -date, -number, -BOrank)
+### Remove some more columns
+predict_data <- select(predict_data, -guests, -date, -number, -BOrank, -avgCommentLength, -neutralComments)
 
-model <- glm(BO ~ ., data = predict_data)
-summary(model)
+### Make the model
+library(rpart)
+
+fit <- rpart(BO ~ ., data = predict_data, method = "class")
+
+plot(fit)
+text(fit)
+
+
+
+
+
+
 
 
 # Make the plot -----------------------------------------------------------
@@ -128,50 +160,4 @@ ggplot(cbb) +
   ggtitle("Top Comedy Bang Bang Guests by Episode", subtitle = "Best Of'd Episodes Highlighted")
 
 ggsave(filename = "cbb-bestof-plot.png", width = 12, height = 6, dpi = 500)
-
-# Make a linear model -----------------------------------------------------
-
-### This is bad and hacked together and is probably bad stats but it's fun.
-### Don't take it too seriously
-bo_lm <- lm(data = (cbb %>% 
-                      filter(!grepl("BO", cbb$number)) %>%
-                      select(which(colnames(cbb) == "BO"):ncol(cbb))), 
-            BO ~ .)
-
-### Remake the top list with the right number
-top_guests <- names(sort(table(all_guests), decreasing = T))
-top_guests_table <- data.frame(sort(table(all_guests), decreasing=T)) %>%
-  filter(Freq > 4)
-
-names(top_guests_table) <- c("name", "count")
-
-### Put the LM weights into a data frame
-lm_table <- data.frame(name = c("Intercept", top_guests), lm_weight = bo_lm[[1]])
-
-### Make a vector of all the guests in Best Of episopdes
-cbb_bo <- subset(cbb, BO == T)
-bo_guests <- c()
-for (i in 1:nrow(cbb_bo)) bo_guests <- c(bo_guests, cbb_bo$guests[[i]])
-
-### Make a summary table of all of the guests in the best ofs
-df_boguests <- data.frame(table(bo_guests))
-
-### Make a pretty data frame with summaries
-summary <- left_join(top_guests_table, df_boguests, by=c("name" = "bo_guests"))
-names(summary) <- c("guest", "ep", "bo")
-summary <- mutate(summary, BO_rate = round(bo/ep, 3))
-summary <- rbind(c("Intercept", 0,0,0), summary)
-summary <- left_join(summary, lm_table, by=c("guest" = "name"))
-summary$lm_weight <- round(summary$lm_weight, 3)
-lm_df <- data_frame(coef(summary(bo_lm)[,2:4]))
-
-### Add significance symbols for quick reference
-summary$sig <- ""
-summary$sig[summary$p < 0.1] <- "."
-summary$sig[summary$p < 0.05] <- "*"
-summary$sig[summary$p < 0.01] <- "**"
-summary$sig[summary$p < 0.001] <- "***"
-
-write_csv(summary, path="cbb-bestof-lm-summary.csv")
-
 
