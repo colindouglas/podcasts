@@ -1,8 +1,10 @@
 library(screddr)
 library(tidyverse)
+library(anytime)
 
 ### Read in OAuth2 keys from external CSV
-oauth <- read_csv("oauth_keys.csv")
+oauth <- read_csv("../oauth_keys.csv") %>% 
+  filter(website == "reddit")
 
 ### Get a token
 RedditAuth(oauth$key, oauth$secret)
@@ -55,3 +57,4 @@ allComments <- newComments %>%
 ### Output all of the data for quicker access in the future
 write_csv(allThreads, path = "data/cbb_reddit_threads.csv")
 write_csv(allComments, path = "data/cbb_reddit_comments.csv")
+
