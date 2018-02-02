@@ -2,7 +2,7 @@ library(screddr)
 library(tidyverse)
 
 ### Read in OAuth2 keys from external CSV
-oauth <- read_csv("oauth_keys.csv")
+oauth <- read_csv("../oauth_keys.csv")
 
 ### Get a token
 RedditAuth(oauth$key, oauth$secret)
