@@ -27,11 +27,12 @@ in.list <- function(element, list) {
 BOs <- read_csv("data/cbb_bestof_episodes.csv") %>%
   pull(number)
 
-cbb <- episode %>%
+cbb <- read_csv("data/cbb_earwolf_scrape.csv") %>%
   mutate(year = year(date),
          sinceMonday = date - as.Date(sapply(year, FirstMonday), origin="1970-01-01"),
          guest_count = lengths(guests),
-         BO = number %in% BOs
+         BO = number %in% BOs,
+         guests = str_split(guests, pattern = ", ")
   )
 
 ### Fix the year if the Best Of episodes leaked into the following year
@@ -46,17 +47,6 @@ for (i in 1:nrow(cbb)) all_guests <- c(all_guests, cbb$guests[[i]])
 bo_guests <- c()
 cbb_bo <- subset(cbb, BO == T)
 for (i in 1:nrow(cbb_bo)) bo_guests <- c(bo_guests, cbb_bo$guests[[i]])
-
-### Make a vector of only the unique guests
-unique_guests <- unique(all_guests)
-
-### Make a logical column in the data frame for a given guests's appearance in an episode
-### This code does the same as before but much faster
-for (i in 1:length(unique_guests)) {
-      cbb[[unique_guests[i]]] <- in.list(unique_guests[i], cbb$guests)
-  }
-rm(i)
-
 
 # Make the plot -----------------------------------------------------------
 
@@ -91,9 +81,9 @@ ggplot(cbb) +
   scale_alpha_manual(values = c(0.05,0.8), guide=F) + 
   
   ### Flip the y axis around so earlier is at the top
-  scale_y_reverse(breaks=2009:2017, name = "Year", limits=c(max(cbb$year)+5*offset,min(cbb$year)-6*offset)) +
+  scale_y_reverse(breaks=2009:2019, name = "Year", limits=c(max(cbb$year)+5*offset,min(cbb$year)-6*offset)) +
   
-  scale_x_continuous(name = "Day (Mondays Aligned)", breaks=seq(0, 365, 30)) +
+  scale_x_continuous(name = "Day (Mondays Aligned)", breaks = seq(0, 365, 30)) +
   scale_color_manual("Guests", labels = paste0(top_guests_table$name, " (", top_guests_table$count, ")"), values = colors, guide="legend") +
   
   ### Draw points for each episode, and adjust the transparency based on whether the 
@@ -110,56 +100,11 @@ ggplot(cbb) +
   
   ### Draw a vertical line at Thanksgiving (Day 325) and label it
   annotate("text", x = 325, y = 2009-6*offset, label = "Thanksgiving Cut-Off", size = 2.5, color="darkgrey", vjust=0) +
-  geom_segment(color="darkgrey", lty=2, aes(x = 325, y = 2008.5, xend = 325, yend = 2017.5)) +
+  geom_segment(color="darkgrey", lty=2, aes(x = 325, y = 2008.5, xend = 325, yend = 2019.5)) +
   
   ### Add a title and a subtitle.
   ggtitle("Top Comedy Bang Bang Guests by Episode", subtitle = "Best Of'd Episodes Highlighted")
 
-# ggsave(filename = "cbb-bestof-plot.png", width = 12, height = 6, dpi = 500)
+ ggsave(filename = "cbb-bestof-plot.png", width = 12, height = 6, dpi = 100)
 
-# Make a linear model -----------------------------------------------------
-
-### This is bad and hacked together and is probably bad stats but it's fun.
-### Don't take it too seriously
-bo_lm <- lm(data = (cbb %>% 
-                      filter(!grepl("BO", cbb$number)) %>%
-                      select(which(colnames(cbb) == "BO"):ncol(cbb))), 
-            BO ~ .)
-
-### Remake the top list with the right number
-top_guests <- names(sort(table(all_guests), decreasing = T))
-top_guests_table <- data.frame(sort(table(all_guests), decreasing=T)) %>%
-  filter(Freq > 4)
-
-names(top_guests_table) <- c("name", "count")
-
-### Put the LM weights into a data frame
-lm_table <- data.frame(name = c("Intercept", top_guests), lm_weight = bo_lm[[1]])
-
-### Make a vector of all the guests in Best Of episopdes
-cbb_bo <- subset(cbb, BO == T)
-bo_guests <- c()
-for (i in 1:nrow(cbb_bo)) bo_guests <- c(bo_guests, cbb_bo$guests[[i]])
-
-### Make a summary table of all of the guests in the best ofs
-df_boguests <- data.frame(table(bo_guests))
-
-### Make a pretty data frame with summaries
-summary <- left_join(top_guests_table, df_boguests, by=c("name" = "bo_guests"))
-names(summary) <- c("guest", "ep", "bo")
-summary <- mutate(summary, BO_rate = round(bo/ep, 3))
-summary <- rbind(c("Intercept", 0,0,0), summary)
-summary <- left_join(summary, lm_table, by=c("guest" = "name"))
-summary$lm_weight <- round(summary$lm_weight, 3)
-lm_df <- data_frame(coef(summary(bo_lm)[,2:4]))
-
-### Add significance symbols for quick reference
-summary$sig <- ""
-summary$sig[summary$p < 0.1] <- "."
-summary$sig[summary$p < 0.05] <- "*"
-summary$sig[summary$p < 0.01] <- "**"
-summary$sig[summary$p < 0.001] <- "***"
-
-write_csv(summary, path="cbb-bestof-lm-summary.csv")
-
-
+ 

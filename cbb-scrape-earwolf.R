@@ -7,13 +7,13 @@ startFresh <- FALSE
 
 # Scrape Earwolf ----------------------------------------------------------
 
-if (startFresh == TRUE) { 
+if (startFresh) { 
   ### Make an empty dataframe
   episode <- data_frame()
-  
   ### The first episode
   next_ep <- "http://www.earwolf.com/episode/welcome-to-comedy-bang-bang/"
-} else if (startFresh == FALSE) {
+  
+} else {
   
   ### Read in the previously-exported CSV
   episode <- read_csv("data/cbb_earwolf_scrape.csv")
@@ -55,6 +55,8 @@ while (length(next_ep) > 0) { # The next episode will be character(0) once it ge
     html_node(".showtitle") %>%
     html_text() 
   
+  print(title)
+  
   ### Get the episode description
   desc <- html_scrape %>%
     html_node(".episodeshowdesc") %>%
@@ -84,13 +86,12 @@ while (length(next_ep) > 0) { # The next episode will be character(0) once it ge
     html_attr('href')
 }
 
-episode_output <- episode
+episode_output <- episode %>%
+  filter(!grepl("vote", title, ignore.case = TRUE)) %>%
+  ### Convert the guest column to a string (from a list)
+  rowwise() %>%
+  mutate(guests = toString(guests))
 
-### Convert the guest column to a string (from a list)
-episode_output$guests <- sapply(episode$guests, toString)
 
 ### Output the dataframe as a CSV
 write_csv(episode_output, path = "data/cbb_earwolf_scrape.csv")
-rm(episode_output)
-
-
