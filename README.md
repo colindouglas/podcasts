@@ -6,6 +6,6 @@ At the end of the year, listeners vote on the best episodes of the year (Thanksg
 
 In 2017, there was a lot of Scott-and-Paul talk in the Best Ofs about the frequency in which Paul appears in Best Of'd episodes, I decided to test whether this was because Paul makes episodes good, or it he's just in a lot of episodes. To do this, I used the statistical computing package R, alongside the tidyverse and rvest packages.
 
-I scraped the data directly from the Earwolf website using the cbb-scrape-earwolf.R script, and then performed the data treatment using the cbb-treatment.R script.
+I scraped the data directly from the Earwolf website using the `cbb-scrape-earwolf.R`, and then created the image via `cbb-treatment.R`.
 
 ![Image description](https://github.com/colindouglas/podcasts/blob/master/cbb-bestof-plot.png)
