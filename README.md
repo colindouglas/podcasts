@@ -8,4 +8,4 @@ In 2017, there was a lot of Scott-and-Paul talk in the Best Ofs about the freque
 
 I scraped the data directly from the Earwolf website using the `cbb-scrape-earwolf.R`, and then created the image via `cbb-treatment.R`.
 
-![Image description](https://github.com/colindouglas/podcasts/blob/master/cbb-bestof-plot.png)
+![Top Comedy Bang Bang Guests by Episode](https://github.com/colindouglas/podcasts/blob/master/images/cbb-bestof-plot.png)
