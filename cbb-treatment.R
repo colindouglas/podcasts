@@ -87,15 +87,15 @@ ggplot(cbb) +
   scale_color_manual("Guests", labels = paste0(top_guests_table$name, " (", top_guests_table$count, ")"), values = colors, guide="legend") +
   
   ### Draw points for each episode, and adjust the transparency based on whether the 
-  geom_point(size = dot_size, color=colors[1], aes(x = sinceMonday, y = year-4*offset, alpha=get(top_guests[1]))) +
-  geom_point(size = dot_size, color=colors[2], aes(x = sinceMonday, y = year-3*offset, alpha=get(top_guests[2]))) +
-  geom_point(size = dot_size, color=colors[3], aes(x = sinceMonday, y = year-2*offset, alpha=get(top_guests[3]))) +
-  geom_point(size = dot_size, color=colors[4], aes(x = sinceMonday, y = year-1*offset, alpha=get(top_guests[4]))) +
-  geom_point(size = dot_size, color=colors[5], aes(x = sinceMonday, y = year, alpha=get(top_guests[5]))) +
-  geom_point(size = dot_size, color=colors[6], aes(x = sinceMonday, y = year + 1*offset, alpha=get(top_guests[6]))) +
-  geom_point(size = dot_size, color=colors[7], aes(x = sinceMonday, y = year + 2*offset, alpha=get(top_guests[7]))) +
-  geom_point(size = dot_size, color=colors[8], aes(x = sinceMonday, y = year + 3*offset, alpha=get(top_guests[8]))) +
-  geom_point(size = dot_size, color=colors[9], aes(x = sinceMonday, y = year + 4*offset, alpha=get(top_guests[9]))) +
+  geom_point(size = dot_size, color=colors[1], aes(x = sinceMonday, y = year-4*offset, alpha=str_detect(guests, top_guests[1]))) +
+  geom_point(size = dot_size, color=colors[2], aes(x = sinceMonday, y = year-3*offset, alpha=str_detect(guests, top_guests[2]))) +
+  geom_point(size = dot_size, color=colors[3], aes(x = sinceMonday, y = year-2*offset, alpha=str_detect(guests, top_guests[3]))) +
+  geom_point(size = dot_size, color=colors[4], aes(x = sinceMonday, y = year-1*offset, alpha=str_detect(guests, top_guests[4]))) +
+  geom_point(size = dot_size, color=colors[5], aes(x = sinceMonday, y = year, alpha=str_detect(guests, top_guests[5]))) +
+  geom_point(size = dot_size, color=colors[6], aes(x = sinceMonday, y = year + 1*offset, alpha=str_detect(guests, top_guests[6]))) +
+  geom_point(size = dot_size, color=colors[7], aes(x = sinceMonday, y = year + 2*offset, alpha=str_detect(guests, top_guests[7]))) +
+  geom_point(size = dot_size, color=colors[8], aes(x = sinceMonday, y = year + 3*offset, alpha=str_detect(guests, top_guests[8]))) +
+  geom_point(size = dot_size, color=colors[9], aes(x = sinceMonday, y = year + 4*offset, alpha=str_detect(guests, top_guests[9]))) +
   geom_point(data=dummy_table, alpha=1, aes(x=x, y=y, color=colors)) +
   
   ### Draw a vertical line at Thanksgiving (Day 325) and label it
@@ -103,8 +103,8 @@ ggplot(cbb) +
   geom_segment(color="darkgrey", lty=2, aes(x = 325, y = 2008.5, xend = 325, yend = 2019.5)) +
   
   ### Add a title and a subtitle.
-  ggtitle("Top Comedy Bang Bang Guests by Episode", subtitle = "Best Of'd Episodes Highlighted")
+  ggtitle("Top Comedy Bang Bang Guests by Episode", subtitle = str_glue("Updated {Sys.Date()} // Best Of'd Episodes Highlighted"))
 
- ggsave(filename = "cbb-bestof-plot.png", width = 12, height = 6, dpi = 100)
+ ggsave(filename = "images/cbb-bestof-plot.png", width = 12, height = 6, dpi = 100)
 
  
