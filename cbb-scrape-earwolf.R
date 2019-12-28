@@ -69,7 +69,7 @@ while (length(next_ep) > 0) { # The next episode will be character(0) once it ge
     html_text() 
 
   ### Make a new row with all of the data
-  newrow <- data_frame(date, number, title, url=next_ep, desc)
+  newrow <- tibble(date, number, title, url=next_ep, desc)
   
   ### Add the guests as a list
   newrow$guests <- list(guest)

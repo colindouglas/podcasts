@@ -84,7 +84,7 @@ ggplot(cbb) +
   scale_y_reverse(breaks=2009:2019, name = "Year", limits=c(max(cbb$year)+5*offset,min(cbb$year)-6*offset)) +
   
   scale_x_continuous(name = "Day (Mondays Aligned)", breaks = seq(0, 365, 30)) +
-  scale_color_manual("Guests (Best Of'd Eps)", labels = paste0(top_guests_table$name, " (", top_guests_table$count, ")"), values = colors, guide="legend") +
+  scale_color_manual("Guest (Best Of'd Eps)", labels = paste0(top_guests_table$name, " (", top_guests_table$count, ")"), values = colors, guide="legend") +
   
   ### Draw points for each episode, and adjust the transparency based on whether the 
   geom_point(size = dot_size, color=colors[1], aes(x = sinceMonday, y = year - 4*offset, alpha=grepl(top_guests[[1]], guests))) +
