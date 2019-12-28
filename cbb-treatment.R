@@ -67,7 +67,7 @@ top_guests <- names(sort(table(bo_guests), decreasing = T)[1:9])
 top_guests_table <- data.frame(sort(table(bo_guests), decreasing=T)[1:9])
 names(top_guests_table) <- c("name", "count")
 
-ggplot(cbb) +
+cbb_plot <- ggplot(cbb) +
   theme_few() +
   ### Draw a filled rectangle around each episode in the Best Of lists
   geom_rect(data = filter(cbb, BO == T), alpha = 0.3, aes(
@@ -105,6 +105,6 @@ ggplot(cbb) +
   ### Add a title and a subtitle.
   ggtitle("Top Comedy Bang Bang Guests by Episode", subtitle = str_glue("Updated {Sys.Date()} // Best Of'd Episodes Highlighted"))
 
- ggsave(filename = "images/cbb-bestof-plot.png", width = 12, height = 6, dpi = 100)
+ ggsave(cbb_plot, filename = "images/cbb-bestof-plot.png", width = 12, height = 6, dpi = 100)
 
  
