@@ -3,8 +3,8 @@
 
 Comedy Bang Bang is an alt-comedy improv podcast published at least
 weekly since 2009. Each episode features one or more guests, who may be
-playing themselves or an improvised character. Since its inception,
-there have been 675 mainline episodes with 481 unique guests.
+playing themselves or an improvised character. As of 2019-12-28, there
+have been 675 mainline episodes with 481 unique guests.
 
 At the end of the year, listeners vote on the best episodes of the year
 (Thanksgiving-to-Thanksgiving), which are compiled in year-end Best Of
