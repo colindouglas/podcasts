@@ -63,8 +63,8 @@ colors <- c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ff7f00", "#8dd3c7", "#
 dummy_table <- data.frame(x=1:9, y=2008)
 
 ### Find the top 9 guests and how many episodes they've appeared in
-top_guests <- names(sort(table(all_guests), decreasing = T)[1:9])
-top_guests_table <- data.frame(sort(table(all_guests), decreasing=T)[1:9])
+top_guests <- names(sort(table(bo_guests), decreasing = T)[1:9])
+top_guests_table <- data.frame(sort(table(bo_guests), decreasing=T)[1:9])
 names(top_guests_table) <- c("name", "count")
 
 ggplot(cbb) +
@@ -84,18 +84,18 @@ ggplot(cbb) +
   scale_y_reverse(breaks=2009:2019, name = "Year", limits=c(max(cbb$year)+5*offset,min(cbb$year)-6*offset)) +
   
   scale_x_continuous(name = "Day (Mondays Aligned)", breaks = seq(0, 365, 30)) +
-  scale_color_manual("Guests", labels = paste0(top_guests_table$name, " (", top_guests_table$count, ")"), values = colors, guide="legend") +
+  scale_color_manual("Guests (Best Of'd Eps)", labels = paste0(top_guests_table$name, " (", top_guests_table$count, ")"), values = colors, guide="legend") +
   
   ### Draw points for each episode, and adjust the transparency based on whether the 
-  geom_point(size = dot_size, color=colors[1], aes(x = sinceMonday, y = year-4*offset, alpha=str_detect(guests, top_guests[1]))) +
-  geom_point(size = dot_size, color=colors[2], aes(x = sinceMonday, y = year-3*offset, alpha=str_detect(guests, top_guests[2]))) +
-  geom_point(size = dot_size, color=colors[3], aes(x = sinceMonday, y = year-2*offset, alpha=str_detect(guests, top_guests[3]))) +
-  geom_point(size = dot_size, color=colors[4], aes(x = sinceMonday, y = year-1*offset, alpha=str_detect(guests, top_guests[4]))) +
-  geom_point(size = dot_size, color=colors[5], aes(x = sinceMonday, y = year, alpha=str_detect(guests, top_guests[5]))) +
-  geom_point(size = dot_size, color=colors[6], aes(x = sinceMonday, y = year + 1*offset, alpha=str_detect(guests, top_guests[6]))) +
-  geom_point(size = dot_size, color=colors[7], aes(x = sinceMonday, y = year + 2*offset, alpha=str_detect(guests, top_guests[7]))) +
-  geom_point(size = dot_size, color=colors[8], aes(x = sinceMonday, y = year + 3*offset, alpha=str_detect(guests, top_guests[8]))) +
-  geom_point(size = dot_size, color=colors[9], aes(x = sinceMonday, y = year + 4*offset, alpha=str_detect(guests, top_guests[9]))) +
+  geom_point(size = dot_size, color=colors[1], aes(x = sinceMonday, y = year - 4*offset, alpha=grepl(top_guests[[1]], guests))) +
+  geom_point(size = dot_size, color=colors[2], aes(x = sinceMonday, y = year - 3*offset, alpha=grepl(top_guests[[2]], guests))) +
+  geom_point(size = dot_size, color=colors[3], aes(x = sinceMonday, y = year - 2*offset, alpha=grepl(top_guests[[3]], guests))) +
+  geom_point(size = dot_size, color=colors[4], aes(x = sinceMonday, y = year - 1*offset, alpha=grepl(top_guests[[4]], guests))) +
+  geom_point(size = dot_size, color=colors[5], aes(x = sinceMonday, y = year,            alpha=grepl(top_guests[[5]], guests))) +
+  geom_point(size = dot_size, color=colors[6], aes(x = sinceMonday, y = year + 1*offset, alpha=grepl(top_guests[[6]], guests))) +
+  geom_point(size = dot_size, color=colors[7], aes(x = sinceMonday, y = year + 2*offset, alpha=grepl(top_guests[[7]], guests))) +
+  geom_point(size = dot_size, color=colors[8], aes(x = sinceMonday, y = year + 3*offset, alpha=grepl(top_guests[[8]], guests))) +
+  geom_point(size = dot_size, color=colors[9], aes(x = sinceMonday, y = year + 4*offset, alpha=grepl(top_guests[[9]], guests))) +
   geom_point(data=dummy_table, alpha=1, aes(x=x, y=y, color=colors)) +
   
   ### Draw a vertical line at Thanksgiving (Day 325) and label it
