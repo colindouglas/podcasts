@@ -1,0 +1,406 @@
+number,rating,title,guests,release_date,accolades,notes,winner,live
+1,3.33,Chili’s,Eva Anderson,2015-05-20,"","",,FALSE
+2,4.33,Taco Bell,Jack Allison,2015-05-25,"","",,FALSE
+3,3.83,IHOP,Alison Agosti,2015-05-28,"","",,FALSE
+4,3.83,Outback Steakhouse,Jon Gabrus,2015-06-04,"","",,FALSE
+5,2.83,Long John Silver's,Mary Holland,2015-06-11,"","",,FALSE
+6,3.83,TGI Fridays,Jordan Morris,2015-06-18,"","Mitch coins ""Spoonman""",,FALSE
+7,4.67,Chipotle,Mike Hanford,2015-06-25,Golden Plate Club,"",,FALSE
+8,2.5,Umami Burger,Heather Anne Campbell,2015-07-02,"","",,FALSE
+9,4.33,Carl’s Jr./Hardee’s,Ben Axelrad,2015-07-09,Golden Plate Club,"creation of the Golden Plate Club and
+Platinum Plate Club",,FALSE
+10,3.67,Domino’s,Matt Kowalick,2015-07-16,"","",,FALSE
+11,1.5,Carrows,Erin Whitehead,2015-07-23,"","",,FALSE
+12,4.33,Chick-fil-A,Betsy Sodaro,2015-07-29,Golden Plate Club,Initially denied entry to the Golden Plate Club due to the owners' open views against homosexuality,,FALSE
+13,3.17,Denny’s,Farley Elliott,2015-08-06,"","",,FALSE
+14,3.5,Original Tommy’s,Jim Woods,2015-08-12,Hand-holding Club,"",,FALSE
+15,3.5,Boston Market,Annie Mebane,2015-08-19,Hand-holding Club,"",,FALSE
+16,5,In-N-Out Burger,Armen Weitzman,2015-08-27,Platinum Plate Club,"",,FALSE
+17,2.33,Subway,Fran Gillespie,2015-09-03,"","",,FALSE
+18,2.67,Steak ‘n Shake,Evan Susser,2015-09-09,"","",,FALSE
+19,4.11,Buffalo Wild Wings,Matt Selman,2015-09-18,Golden Plate Club,Tickle Porn,,FALSE
+20,3.17,Starbucks with Joe Saunders,NA,2015-09-24,"","",,FALSE
+21,4.17,L&L Hawaiian Barbecue,Eugene Cordero,2015-10-01,Golden Plate Club,"",,FALSE
+22,3.17,Rockdoughberfest: Cabo Wabo Cantina,Julie Brister,2015-10-08,Fork Rating Revision,"",,FALSE
+23,3.17,Rockdoughberfest: Margaritaville,Mike Carlson,2015-10-15,Fork Rating Revision,"",,FALSE
+24,2.17,Rockdoughberfest: Hard Rock Cafe,Scott Gairdner,2015-10-22,Fork Rating Revision,"",,FALSE
+25,3.17,Rockdoughberfest: Rock & Brews,Zoe Jarman,2015-10-29,"","",,FALSE
+26,3.5,Burger King,John Roy,2015-11-05,"","",,FALSE
+27,4.33,Fuddruckers,Ryan Perez,2015-11-12,Golden Plate Club,"First ""The Doughboys can't be bought.""",,FALSE
+28,4.5,Del Taco,Alan Yang,2015-11-19,Golden Plate Club,"",,FALSE
+29,3.17,Wingstop,Emmy Blotnick,2015-12-03,"","",,FALSE
+30,3.5,Arby’s,Vanessa Ramos,2015-12-10,"","",,FALSE
+31,5,Steak ‘n Shake 2,Evan Susser,2015-12-17,Platinum Plate Club,"",,FALSE
+32,2.17,Pizza Hut,Neil Campbell,2016-01-07,"","",,FALSE
+33,3.83,Five Guys,Jefferson Dutton,2016-01-14,Ex-member of the Hand-holding Club,"",,FALSE
+34,3.17,California Pizza Kitchen,Eva Anderson,2016-01-21,"","",,FALSE
+35,3.83,Krispy Kreme,Matt Besser,2016-01-28,"","First Wiger
+Drop",,FALSE
+36,2,Togo’s,Matty Smith,2016-02-04,"","",,FALSE
+37,3.17,Panda Express,Tricia McAlpin,2016-02-11,"","",,FALSE
+38,3.43,Mimi’s Cafe,Georgia Hardstark,2016-02-18,"","",,FALSE
+39,5,Wendy’s,Paul Rust,2016-02-25,Platinum Plate Club,"",,FALSE
+40,,Tournament of Chompions: Carl’s Jr./Hardee’s v. Fuddruckers,NA,2016-03-03,"",(guest: Jess McKenna),Winner: Carl's Jr.,FALSE
+41,,Tournament of Chompions: Eat-in Minisode – ??? v. ???,NA,2016-03-09,"",(no guest),Winner: Burger King,FALSE
+42,,Tournament of Chompions: Steak ‘n Shake v. 6-seed,NA,2016-03-10,"",(guest: Michael Cassady),Winner: Five Guys,FALSE
+43,,Tournament of Chompions: Carl’s Jr./Hardee’s v. In-N-Out Burger,NA,2016-03-17,"",(guest: John Gemberling),Winner: In-N-Out Burger,FALSE
+44,,Tournament of Chompions: Minisode – Five Guys v. Shake Shack,NA,2016-03-23,"",(guests: Evan Susser & Matty Smith),Winner: Shake Shack,FALSE
+45,,Tournament of Chompions: Minisode Winner v. Wendy’s,NA,2016-03-24,"",(guest: Nicole Byer),Winner: Shake Shack,FALSE
+46,,Tournament of Chompions: FINALS – In-N-Out Burger v. Shake Shack,NA,2016-03-31,"",(guest: Evan Susser),Winner: In-N-Out Burger,FALSE
+47,4.5,Veggie Grill,Nathan Barnatt,2016-04-07,Golden Plate Club,"",,FALSE
+48,1.42,Chuck E. Cheese’s,Erin McGathy,2016-04-14,"","Nick's infamous ""Voluminous Wet Dream"" story.",,FALSE
+49,4,Sweetgreen,Siobhan Thompson,2016-04-21,Golden Plate Club,"",,FALSE
+50,5,Hillstone,David Phillips,2016-04-28,Platinum Plate Club,"",,FALSE
+51,1.83,The Olive Garden,Christine Nangle,2016-05-05,"","",,FALSE
+52,5,Morton’s The Steakhouse,Tim Kalpakis,2016-05-12,Platinum Plate Club,the debut of Roast Spoonman,,FALSE
+53,2,Yoshinoya,Jensen Karp,2016-05-19,"","",,FALSE
+54,3.67,Popeyes Louisiana Kitchen,Lesley Arfin,2016-05-26,"","",,FALSE
+55,2.33,Baja Fresh,Claudia O’Doherty,2016-06-02,Ballpark Buds Club,"",,FALSE
+56,2.75,Jollibee,Jonah Ray,2016-06-09,"","",,FALSE
+57,4.67,Hokkaido Ramen Santouka,Jeff Kenji Sloniker,2016-06-16,Golden Plate Club,"",,FALSE
+58,3,Pinkberry,Lauren Lapkus,2016-06-23,Hand-holding Club,"",,FALSE
+59,4,Islands,Nick Mundy,2016-06-23,Ballpark Buds Club,"",,FALSE
+60,3,Bubba Gump Shrimp Co.,Paul Scheer,2016-07-07,Hand-holding Club,"",,FALSE
+61,3.97,Bob’s Big Boy,Dave Ferguson,2016-07-14,Ballpark Buds Club,"",,FALSE
+62,4.67,Fatburger,Yamara Taylor,2016-07-20,Golden Plate Club,"",,FALSE
+63,3.17,7-Eleven,Fran Gillespie,2016-07-28,Ballpark Buds Club,"",,TRUE
+MINI,,Minisode: The 2016 Doughlympic Opening Ceremonies hosted by Joe Saunders,NA,2016-08-02,"","",N/A,FALSE
+64,,Doughlympics: Domino’s v. Papa John’s v. Pizza Hut,Michael Blaiklock,2016-08-04,"",Doughlympics - Pizza Division,"Gold: Pizza Hut
+Silver: Domino's
+Bronze: Papa John's",FALSE
+AD1,,Minisode: After Dough with Joe Episode 1,NA,2016-08-08,"","","",FALSE
+65,,Doughlympics: Chipotle v. Del Taco v. Taco Bell,Courtney Davis,2016-08-11,"","Doughlympics, Mexican Division","Gold: Taco Bell
+Silver: Del Taco
+Bronze: Chipotle",FALSE
+AD2,,Minisode: After Dough with Joe Episode 2,NA,2016-08-16,"","",N/A,FALSE
+66,,Doughlympics: Dunkin' Donuts v. McDonalds v. Starbucks,Sean O'Connor,2016-08-18,"","Doughlympics, Coffee Division","Gold: Dunkin' Donuts
+Silver: McDonald's
+Bronze: Starbucks",FALSE
+AD3,,Minisode: After Dough with Joe Episode 3,NA,2016-08-22,"","",N/A,FALSE
+67,5,The Cheesecake Factory,Beck Bennett,2016-08-25,Platinum Plate Club,"",,FALSE
+68,3.42,Red Robin,D'Arcy Carden,2016-09-01,Ballpark Buds Club,"",,FALSE
+69,2.33,Yogurtland,Van Robichaux,2016-09-08,"","",,FALSE
+70,3,Dave & Buster’s,Allan McLeod,2016-09-15,Ballpark Buds Club,"",,FALSE
+71,4.17,Baskin-Robbins,Dave King,2016-09-22,"","",,FALSE
+72,4.17,Dairy Queen,"Christine Nangle, Matt Selman Live At L.A. Podfest 2016",2016-09-29,"","",,TRUE
+73,5,Rocklobsterfest: Red Lobster 1,Jessica McKenna,2016-10-06,"","During Rocklobsterfest, only the guest gave a fork rating until the final episode",,FALSE
+74,3,Rocklobsterfest: Red Lobster 2,Ross Kimball,2016-10-13,"","During Rocklobsterfest, only the guest gave a fork rating until the final episode",,FALSE
+75,5,Rocklobsterfest: Red Lobster 3,Nicole Byer,2016-10-20,"","During Rocklobsterfest, only the guest gave a fork rating until the final episode",,FALSE
+76,3.54,Rocklobsterfest: Red Lobster 4,"Sean Clements, Hayes Davenport",2016-10-27,"",Final overall fork rating of Rocklobsterfest,,FALSE
+77,3,Cold Stone Creamery,Kevin T. Porter,2016-11-02,"","",,FALSE
+78,3.67,Wood Ranch,Esther Povitsky,2016-11-10,"",Evan Susser ate with Mitch and provided an additional 3-fork rating (not included in average),,FALSE
+79,4.5,Church's Chicken,Demi Adejuyigbe,2016-11-17,Golden Plate Club,"",,FALSE
+80,2.17,Hooters,Kulap Vilaysack,2016-11-30,Ballpark Buds Club,"",,FALSE
+81,4,Jack in the Box,Spencer Crittenden,2016-12-08,"","",,FALSE
+82,2.17,Steak 'n Shake 3,Evan Susser,2016-12-15,Ballpark Buds Club,"Blow Up episode. Due to inconsistent branding and quality, Steak 'n Shake was removed from the Platinum Plate Club.",,FALSE
+RB,,Rogueboys: Rogue One,Drew McWeeny,2016-12-22,Dinner Is The Movie,"",N/A,FALSE
+83,2.83,Tender Greens,Ryan Stanger,2017-01-05,"","Wiger originally gave 3 forks, but later revised his rating to 2 forks, removing Tender Greens from the Ballpark Buds Club.",,FALSE
+84,2.58,Buca di Beppo,Drew McWeeny,2017-01-12,Ballpark Buds Club,"Spoonister Six, Week 1",,FALSE
+85,4.17,Tony Roma's,Bug Mane,2017-01-19,"","Spoonister Six, Week 2. The Ballpark Buds Club was eliminated during the ratings phase.",,FALSE
+86,4.67,Taco Bell 2,Jon Gabrus,2017-01-26,Golden Plate Club,"Spoonister Six, Week 3",,TRUE
+87,4.83,Taco Bell 3,Bobby Lee,2017-02-02,Golden Plate Club,"Spoonister Six, Week 4",,FALSE
+88,3.75,BJ's,"Sean Clements, Hayes Davenport",2017-02-09,"","Spoonister Six, Week 5",,FALSE
+89,,Mac To-Fight,"Evan Susser, Van Robichaux",2017-02-16,"",A break from the normal format and the Spoonister Six.,"",FALSE
+90,4.75,In-N-Out Burger 2,???,2017-02-23,"","Spoonister Six, Week 6; Mitch's 1st Sneeze",,FALSE
+91,,Tournament of Chompions: McDonald's v. Panda Express,Fran Gillespie,2017-03-02,"",Chicken Fight: Small Pieces region,Winner: McDonald's,FALSE
+92,,Tournament of Chompions: Chick-fil-A v. Wendy's,Ryan Perez,2017-03-05,"",Chicken Fight: Sandwich region,Winner: Wendy's,FALSE
+DD1,,Fat Chance Kitchen,Evan Susser,2017-03-06,"",Chicken Fight: Fat Chance Kitchen round 1. Also debut Doughboys Double ep.,Winner: Chick-fil-A,FALSE
+93,,Tournament of Chompions: Full Bird Region,Eugene Cordero,2017-03-09,"",Chicken Fight: Full Bird region,Winner: Popeyes,FALSE
+94,,Tournament of Chompions: Buffalo Wild Wings v. Wingstop,Nicole Byer,2017-03-13,"",Chicken Fight: Wings region,Winner: Wingstop,FALSE
+DD2,,Fat Chance Kitchen 2,Eva Anderson,2017-03-14,"",Chicken Fight: Fat Chance Kitchen round 2,Winner: Church's Chicken,FALSE
+95,,Tournament of Chompions: McDonald's v. Popeyes,Armen Weitzman,2017-03-16,"",Chicken Fight: Semisoft-finals,Winner: Popeyes,FALSE
+DD3,,Fat Chance Kitchen 3,Spencer Crittenden,2017-03-20,"",Chicken Fight: Fat Chance Kitchen round 3,Winner: Church's Chicken,FALSE
+96,,Tournament of Chompions: Wendy's v. Wingstop,Matt Selman,2017-03-23,"",Chicken Fight: Semisoft-Finals,Winner: Wingstop,FALSE
+DD4,,Fat Chance Kitchen 4 with Joe Saunders,NA,2017-03-28,"",Chicken Fight: Fat Chance Kitchen final round,Winner: Wendy's,FALSE
+97,,Tournament of Chompions: FINALS,Paul Rust,2017-03-30,"",Chicken Fight: FINALS,Winner: Wendy's,FALSE
+DD5,,Dudley Chew-Right,Nick Ross,2017-04-03,"",Canadian Snacks,"",FALSE
+98,1.83,Jamba Juice,Dylan Gelula,2017-04-06,"","",,FALSE
+DD6,,Biggie Size Feedbag,Yusong Liu,2017-04-10,"","","",FALSE
+99,3.33,Jimmy John's,Lauren Lapkus,2017-04-13,"","",,FALSE
+DD7,,*batteries not included,Amy Nicholson,2017-04-17,Dinner Is The Movie,"","",FALSE
+100,,Nugget Power Hour,"Nicole Byer, Jon Gabrus",2017-04-20,"","","",FALSE
+DD8,,The Wonderful World of Soda,Mike Hanford,2017-04-24,"","","",FALSE
+101,2.5,Wetzel's Pretzels,Jon Daly,2017-04-27,"","",,FALSE
+DD9,,Wendy Wexler,Evan Susser,2017-05-01,Dinner Is The Movie,Wendy's Fresh Mozzarella Chicken & Sandy Wexler,"",FALSE
+102,2.5,Mr. Pizza,Jesse Thorn,2017-05-04,"","",,FALSE
+DD10,,Chews Yourself,Jeff Dutton,2017-05-09,"",M&Ms Power Ranking,"",FALSE
+103,4,Carl's Jr./Hardee's 2,Chris VanArtsdalen,2017-05-11,"Hand-holding Club, Golden Plate Club","",,FALSE
+DD11,,Mama Mitchell,Corinne Mitchell,2017-05-15,"",Taco Bell's Naked Chicken Chips & Mitch's Mum,"",FALSE
+104,3,Sharky's,Erin McGathy,2017-05-18,Hand-holding Club,"",,FALSE
+DD12,,Mike is Hard,Jesse Farrar,2017-05-23,"",Mike's Hard Lemonade flavors,"",FALSE
+105,4,IKEA,Dave Thomason,2017-05-25,"","",,FALSE
+DD13,,Summer's Poppin',Betsy Sodaro,2017-05-30,"",Pop-Tarts and Summer BBQ Draft,"",FALSE
+106,3.89,The Coffee Bean,Hannah Kasulka,2017-05-31,"","",,FALSE
+DD14,,Unsatisfied Yelpers,Erin Whitehead,2017-06-05,"",Dr. Pepper Pop Quiz,"",FALSE
+107,3.67,Jersey Mike's,Drew Tarver,2017-06-07,"","",,FALSE
+DD15,,Dead Men Chew No Meals,Bug Mane,2017-06-13,Dinner Is The Movie,Pirates of the Caribbean and Pepsi Fire,"",FALSE
+108,4.17,Sizzler,Marisa Pinson,2017-06-15,Golden Plate Club,"",,FALSE
+DD16,,Zingin' and Jinglin',Michael Cassady,2017-06-19,"",KFC Zinger and jingles,"",FALSE
+109,1.5,Burger King 2,Jordan Morris,2017-06-22,"","",,TRUE
+DD17,,Best of Enemies,Ross Kimball,2017-06-26,Dinner Is The Movie,French Fry Ranking,"",FALSE
+110,2.25,Claim Jumper,Heather Anne Campbell,2017-06-29,"","",,FALSE
+DD18,,"Red, White, & Gru",Mary Holland,2017-07-03,Dinner Is The Movie,4th of July and Despicable Me 3,"",FALSE
+111,4.5,Shake Shack,Jason Concepcion,2017-07-06,Golden Plate Club,"",,FALSE
+DD19,,Mickey Mouse Chub,Jon Gutierrez,2017-07-10,"",Disney Park Attractions,"",FALSE
+112,3.583,Umami Burger 2,David Neher,2017-07-12,"","Test driving the ""Impossible Burger""",,FALSE
+DD20,,Biggie Feedbag 2,Yusong Liu,2017-07-18,"","","",FALSE
+113,3.25,Golden Corral,Stoney Sharp,2017-07-20,"","the original ""hot salad"" episode",,FALSE
+DD21,,Hotel Donklevania,Charles Ingram,2017-07-24,Dinner Is The Movie,Donkey Kong and Castlevania,"",FALSE
+114,4.33,Dunkin' Donuts with Joe Mande,NA,2017-07-27,Golden Plate Club,"",,FALSE
+DD22,,Songs of Summer,Jessica McKenna,2017-07-31,"",Wendy's Bacon Queso line,"",FALSE
+115,2.83,IHOP 2,Danny Jelinek,2017-08-03,"",Rating based on non-breakfast food only (dinner plates).,,FALSE
+DD23,,An Inconvenient Double,Jack Allison,2017-08-07,Dinner Is The Movie,Doritos Heat Wave and An Inconvenient Sequel,"",FALSE
+116,5,Roscoe's House of Chicken and Waffles,Carl Tart,2017-08-10,Platinum Plate Club,"",,FALSE
+DD24,,The First Domino with Joe Quasarano,NA,2017-08-14,"",The Spotted Cheetah,"",FALSE
+117,3.83,Daphne's,Jessica Jean Jardine,2017-08-17,"","",,FALSE
+DD25,,Celebrity Liquor,Jordan Morris,2017-08-21,"","","",FALSE
+118,3.916,Chipotle 2,Chelsea Davison,2017-08-24,"","",,FALSE
+DD26,,Malcolm McDonald's,Mookie Blaiklock,2017-08-28,"",McDonald's fries,"",FALSE
+119,3.83,KFC,Paul F. Tompkins,2017-08-31,"","",,FALSE
+DD27,,Dream Mitchy,NA,2017-09-05,"",Pizano's Pizza and Dream Daddy,"",FALSE
+120,1.33,HomeTown Buffet,Toni Charline,2017-09-07,"","",,FALSE
+DD28,,WWEating,Matt Mazany,2017-09-11,"","","",FALSE
+121,3.5,Shakey’s Pizza,Kyle Mooney,2017-09-14,Hand-holding Club,"",,FALSE
+DD29,,The Snacklog,Alana Johnston 🔪,2017-09-18,"","","",FALSE
+122,3,El Pollo Loco,Lamar Woods,2017-09-21,"","",,FALSE
+DD30,,Biggie Feedbag 3,Yusong Liu,2017-09-25,"","","",FALSE
+123,2.5,Guy’s American Kitchen,Christine Nangle,2017-09-28,"",live in New York City,,TRUE
+DD31,,Doughsman: The Golden Circle,Ryan Perez,2017-10-03,Dinner Is The Movie,Lay's flavors and Kingsman: The Golden Circle,"",FALSE
+124,3.67,Yard House,Matt Besser,2017-10-05,"",Jockdoughberfest 2017,,FALSE
+DD32,,New Pork City,Tiffany Do,2017-10-09,"",recorded in a New York City hotel room,"",FALSE
+125,1.25,ESPN Zone,Neil Campbell,2017-10-12,"",Jockdoughberfest 2017,,FALSE
+DD33,,State of the Podcast,Evan Susser,2017-10-16,"",Hostess ice cream products,"",FALSE
+126,4.875,Medieval Times,"Mary Holland, Matt Newell",2017-10-19,Golden Plate Club,Jockdoughberfest 2017,,FALSE
+DD34,,Gumshoes,Madeline Walter,2017-10-23,"",Flight snacks & gum,"",FALSE
+127,,The Great Shrimp Off,"Sean Clements, Hayes Davenport",2017-10-26,"",Jockdoughberfest 2017,"",FALSE
+DD35,,Mount Frightmore,"Mano Agapion, Betsy Sodaro",2017-10-30,Dinner Is The Movie,Horror movies,"",FALSE
+128,2.42,Arby’s 2,John Hodgman,2017-11-02,"","",,FALSE
+DD36,2.58,TacoTime,Evan Susser (LIVE in Portland),2017-11-06,"","A Double, but a full live episode",,TRUE
+129,3.75,Wienerschnitzel,Rob Huebel,2017-11-09,"","",,FALSE
+DD37,,Naked Egg Odyssey,Heather Anne Campbell,2017-11-13,"",Naked Egg Taco and Super Mario Odyssey,"",FALSE
+130,4.67,Dick’s Drive-In,Evan Susser,2017-11-16,Golden Plate Club,LIVE in Seattle,,TRUE
+DD38,,Mash-Off,Mike Hanford,2017-11-20,"",Thanksgiving,"",FALSE
+DD39,4,Japadog,Evan Susser,2017-11-27,Golden Plate Club,"A Double, but a full live episode (LIVE in Vancouver)",,TRUE
+131,3.75,Chick-fil-A,Noël Wells,2017-11-29,"","",,FALSE
+DD40,,Biggie Feedbag 4,Yusong Liu,2017-12-04,"",Farmhouse King,"",FALSE
+132,4.33,Fosters Freeze,Holly Prazoff,2017-12-07,Golden Plate Club,"",,FALSE
+DD41,,It's a Cookbook!,"Kelly Nugent, Lindsay Katai",2017-12-11,"",Pumpkin Spice Cheerios,"",FALSE
+133,4.17,Torchy's Tacos,Jon Gabrus (LIVE in Austin),2017-12-14,Golden Plate Club,"live in Austin, TX",,TRUE
+DD42,,A Very Doughboys Christmas,NA,2017-12-19,"",remake of A Christmas Carol,"",FALSE
+134,3.78,Cinnabon,Nicole Byer,2017-12-21,"","",,FALSE
+DD43,,Year-End Clearance,Allan McLeod,2018-01-01,"",Snacklog and Feedbag,"",FALSE
+135,,Doughboys Double - Dream Mitchy,NA,2018-01-03,"",Free preview of a Doughboys Double episode. Still given its own number 135.,"",FALSE
+DD44,,The Last Jedi,Drew McWeeny,2018-01-08,Star Wars Month,"","",FALSE
+136,4,Shipley Do-Nuts,Jon Gabrus,2018-01-10,Golden Plate Club,"live in Houston, TX",,TRUE
+DD45,,Star Wars Fantasy Auction with Joe Saunders,NA,2018-01-15,Star Wars Month,"","",FALSE
+137,2.97,Carl's Jr./Hardee's 3,Alana Johnston 🔪,2018-01-17,"",removed from the Golden Plate Club,,FALSE
+DD46,,"The Force Awakens Commentary, Part One",NA,2018-01-22,Star Wars Month,"","",FALSE
+138,4.17,Whataburger,Jon Gabrus,2018-01-25,Golden Plate Club,"live in Dallas, TX",,TRUE
+DD47,,"The Force Awakens Commentary, Part Two",NA,2018-01-30,Star Wars Month,"","",FALSE
+139,3.67,The Halal Guys,Dave Schilling,2018-02-01,"","In ep. 140, Nick revisited and upgraded this rating, placing it in the Golden Plate Club.",,FALSE
+DD48,,Toast 1,Erin Whitehead,2018-02-06,"","","",FALSE
+140,2.65,Checkers and Rally's,Neil Punsalan,2018-02-08,"","",,FALSE
+DD49,,Eat Your Heart Out,Toni Charline,2018-02-13,"",Valentine's Day candy,"",FALSE
+141,5,Sugarfish,Jason Mantzoukas,2018-02-15,Platinum Plate Club,"",,FALSE
+DD,,The Doughlympic Winter Games,Holly Prazoff,2018-02-20,"","Frozen Foods. Also with Evan Susser, Joe Saunders, Max Mayer.","",FALSE
+142,4.67,Ike's,Spencer Crittenden,2018-02-22,Golden Plate Club,live from San Francisco (SF Sketchfest),,TRUE
+DD50,,Biggie Feedbag V,Yusong Liu,2018-02-27,"",Japanese KitKats,"",FALSE
+143,,Munch Madness: Domino's vs. Pizza Hut,Claudia O'Doherty,2018-03-01,"",The Slice Is Right - Juggernaut Region,Winner: Domino's,FALSE
+DD,,Munch Madness: Blaze Pizza vs. Sbarro,Eva Anderson,2018-03-06,"",The Slice Is Right - Food Court Region,Winner: Blaze Pizza,FALSE
+144,,Munch Madness: Little Caesars vs. Papa John's,John Gemberling,2018-03-08,"",The Slice Is Right - CEO Region,Winner: Little Caesars,FALSE
+DD,,Munch Madness: California Pizza Kitchen vs. Costco,Marisa Pinson,2018-03-13,"",The Slice Is Right - Class Struggle Region,Winner: Costco,FALSE
+145,,Munch Madness: Semifinals Match 1,Carl Tart,2018-03-15,"",The Slice Is Right,Winner: Blaze,FALSE
+DD,,Munch Madness: Fat Chance Kitchen Semifinals,Neil Campbell,2018-03-20,"",The Slice Is Right - Sides Showdown,Winner: California Pizza Kitchen,FALSE
+146,,Munch Madness: Semifinals Match 2,Michael Daniel Cassady,2018-03-22,"",The Slice Is Right,Winner: Costco,FALSE
+DD,,Munch Madness: Fat Chance Kitchen Finals,Tricia McAlpin,2018-03-27,"",The Slice Is Right - Best Slice,"Winner:
+Domino's",FALSE
+147,,Munch Madness: Finals,Paul Scheer,2018-03-29,"",The Slice Is Right,Winner: Domino's,FALSE
+DD,,My Dinner,Wiger,2018-04-03,Dinner Is The Movie,Taco Bell's Nacho Fries and My Dinner With Andre,"",FALSE
+148,1.92,Coco's,Alison Rosen,2018-04-05,"","",,FALSE
+DD,,Farley Recently,Farley Elliott,2018-04-10,"",LA food scene,"",FALSE
+149,3.67,The Pie Hole,Marcy Jarreau,2018-04-12,"",Nick bumps his Taco Bell score to 5 forks.,,FALSE
+DD,,Secret Menu,Justin Lee,2018-04-17,"",Jack In The Box Cholula Buttery Jack and Cholula Fries,"",FALSE
+150,4.2,The Dopeboys 4/20 Smokestacular,Jon Gabrus,2018-04-19,"","",,FALSE
+DD,,Big & Tall,Ross Kimball,2018-04-24,"",Burger King Sourdough King & Spicy Chicken Sandwich,"",FALSE
+151,3.5,Farmer Boys,Nick Rutherford,2018-04-26,"","",,FALSE
+DD,,Gluten-Free Summer Movie Preview,Punam Patel,2018-05-01,"","","",FALSE
+152,3.45,Olive Garden 2 with Joel Kim Booster,NA,2018-05-03,"","",,FALSE
+DD,,Greek Bats,Julie Brister,2018-05-08,Dinner is the Movie,The Week Of and Arby's Gyros,"",FALSE
+153,4.33,Ruth's Chris Steak House,Andrew Secunda,2018-05-10,Golden Plate Club,"",,FALSE
+DD,,Tropical Freeze,Jason Schreier,2018-05-15,"",Donkey Kong Country: Tropical Freeze,"",FALSE
+154,4.025,TGI Friday's 2,The Sklar Brothers,2018-05-17,"","",,FALSE
+DD,,Ba Da Ba Ba Bah,Jennie Pierson,2018-05-22,"",McDonald's Fresh Beef Quarter Pounders and Mt. McRushmore Draft,"",FALSE
+155,4,Denny's Solo Menu,Matt Mira,2018-05-24,Golden Vest Club,on a scale of 1-5 Han Solo vests,,FALSE
+DD,4.5,Saved by the Max,Paul Scheer,2018-05-29,Golden Plate Club,Pop Chips Galaxy Puffs,,FALSE
+156,4,Taco Bell 4,Gillian Jacobs,2018-05-31,"",removed from the Platinum Plate Club! (and the Golden Plate Club too),,FALSE
+DD,,U Talkin' DMB To Me?,NA,2018-06-05,"",Dave Matthews Band,"",FALSE
+157,4.33,Gus's World Famous Fried Chicken,Ben Gruber,2018-06-07,Golden Plate Club,"",,FALSE
+DD,,Solo,Danny Jelinek,2018-06-12,Dinner is the Movie,Solo: A Star Wars Story,"",FALSE
+158,3.25,Quizno's,Haley Joel Osment,2018-06-13,"","",,FALSE
+DD,,Tarot Pizza,Ariana Lenarsky,2018-06-19,"","","",FALSE
+159,3.42,Firehouse Subs,Mary Sohn,2018-06-21,"","",,FALSE
+DD,,TakeOver: Chicago,Mike Carlson,2018-06-26,"","","",FALSE
+160,3.72,Norms,Jordan Morris,2018-06-28,"","",,FALSE
+DD,,"Cool, Cool Mountain",The Sloppy Boys,2018-07-03,"",a variety of frozen treats,"",FALSE
+161,3.75,IHOb,Bug Mane,2018-07-05,"","",,FALSE
+DD,,Biggie Feedbag VI,Yusong Liu,2018-07-10,"","","",FALSE
+162,3.67,Panda Express 2,Cristela Alonzo,2018-07-12,"","",,FALSE
+DD,,The Wonderful World of Soda 2,Julia Prescott,2018-07-17,"","","",FALSE
+163,3.17,Mel's Drive-In,Jon Gabrus,2018-07-19,"","",,TRUE
+DD,,Mission Impossible,Ben Rodgers,2018-07-24,Dinner is the Movie,Mission: Impossible franchise,"",FALSE
+164,2.83,Panera Bread,Bill Oakley,2018-07-26,"","",,FALSE
+DD,,"Veni, Vidi, Mitchy","Lindork, Frielbot, Mikeus",2018-07-31,"",snacks from Italy,"",FALSE
+165,3.25,Souplantation/Sweet Tomatoes,"Kelly Nugent, Lindsay Katai",2018-08-02,"","",,FALSE
+DD,,Sonic The Hedgehog,Jocelyn Richard,2018-08-07,"","","",FALSE
+166,2.125,Pink's Hot Dogs,Alana Johnston 🔪,2018-08-09,"",live from Los Angeles. also with Evan Susser.,,FALSE
+DD,,The Evan Susser Summer Ice Cream Invitational Semi Finals,NA,2018-08-14,"","",Winner: Baskin-Robbins,FALSE
+167,,The Evan Susser Summer Ice Cream Invitational Finals,Evan Susser,2018-08-16,"","",Winner: Ben & Jerry's,FALSE
+DD,,"Lakewood, California",Matt Apodaca,2018-08-21,"",Dunkin' Donuts Donut Fries,"",FALSE
+168,3.31,P. F. Chang's,"Jessica McKenna, Zach Reino",2018-08-23,"","",,FALSE
+DD,,LIVE from Outside Lands,"Jon Gabrus, Paul Scheer",2018-08-28,"","live in San Francisco, CA","",FALSE
+169,2.67,Johnny Rockets,Esther Povitsky,2018-08-30,"","",,FALSE
+DD,,Biggie Feedbag VII,Yusong Liu,2018-09-04,"","","",FALSE
+170,2.17,Wahoo's Fish Taco,Eliza Skinner,2018-09-06,"",debut of Mitch's Mickey Mouse doll story,,FALSE
+DD,,Back to School,Ronnie Adrian,2018-09-11,"",Kids' School Snacks,"",FALSE
+171,2.67,Outback Steakhouse 2,Leann Bowen,2018-09-13,"","",,FALSE
+DD,,The Snacklog,Adam Gertler,2018-09-18,"","","",FALSE
+172,4,Menchie's,Jackie Johnson,2018-09-20,Golden Plate Club,"",,FALSE
+BC1,3.25,Zucchini Spice Bread,Lauren McGuire,2018-09-21,The Bread Cast,"",,FALSE
+DD,,U Talkin' To Me? RE: DMB (U Talkin' DMB To Me Part 2),NA,2018-09-25,"","","",FALSE
+173,5,Benihana,D'Arcy Carden,2018-09-27,Platinum Plate Club,"",,FALSE
+BC2,,White Bread,David Phillips,2018-09-28,The Bread Cast,"","",FALSE
+DD,,Octdoughberblessed: Take Me To Church,NA,2018-10-02,"","","",FALSE
+174,,Octdoughberblessed: In-N-Out vs Chick-Fil-A,Scott Aukerman,2018-10-04,"","","Winner:
+In-N-Out",FALSE
+BC3,,Buttermilk Biscuits,Jane Becker,2018-10-05,The Bread Cast,"","",FALSE
+DD,,Octdoughberblessed: Kosher Pig-Out,Becky Feldman,2018-10-09,"",Kosher Snacks,"",FALSE
+175,3.44,Octdoughberblessed: Canter's Deli,"Evan Susser, David Phillips",2018-10-11,"","",,FALSE
+DD,,Octdoughberblessed: Meditation,Ryan Stanger,2018-10-16,"","","",FALSE
+176,4,Octdoughberblessed: Loving Hut,Raj Desai,2018-10-18,Golden Collection Plate Club,"",,FALSE
+DD,,Octdoughberblessed: The Exorcist,Fran Gillespie,2018-10-23,Dinner is the Movie,"","",FALSE
+177,4.67,Octdoughberblessed: Cracker Barrel,Betsy Sodaro,2018-10-25,Golden Collection Plate Club,"",,FALSE
+DD,2.08,Octdoughberblessed: Sunday Brunch,Lindsay Katai,2018-10-30,"","",,FALSE
+178,3.31,Maggiano's Little Italy,Kevin Pollack,2018-11-01,"",also with Jaime Fox,,FALSE
+DD,,Biggie Feedbag VIII,"Yusong Liu, Emma Erdbrink",2018-11-06,"","","",FALSE
+179,4.75,Top Round Roast Beef,Ike Barinholtz,2018-11-08,Golden Plate Club,"",,FALSE
+DD,,McDowell's,Dave Schilling,2018-11-13,Dinner is the Movie,Coming To America,"",FALSE
+180,4.33,El Torito,Jack Allison,2018-11-15,Golden Plate Club,"",,FALSE
+DD,,Mash-Off 2: The New Batch,Eva Anderson,2018-11-20,"",Thanksgiving,"",FALSE
+DD,,Peanut Butter Bonanza,April Mouton,2018-11-27,"","","",FALSE
+181,3.94,Dairy Queen,Don't Stop or We'll Die,2018-11-29,"",Michael Cassady & Paul Rust,,FALSE
+DD,,Irish Whiskey and American McRibs,Erin McGathy,2018-12-04,"",Nick is late and the show begins without him.,"",FALSE
+182,4.5,Rubio's,Mary Holland,2018-12-06,Golden Plate Club,"live in San Diego, CA",,TRUE
+DD,,Soup's Up with Joe Hartzler,NA,2018-12-11,"","","",FALSE
+183,1.83,Papa John's,Lamar Woods,2018-12-13,"","",,FALSE
+BC4,,The Bread Cast Holiday Special,the Doughboys,2018-12-18,The Bread Cast,"","",FALSE
+184,5,McDonald's,Sarah Silverman,2018-12-20,Platinum Plate Club,one of the most exciting moments in Doughboys history,,FALSE
+DD,,The 2018 Doughboys Christmas Special: Wiger Alone,NA,2018-12-25,"",Home Alone reboot,"",FALSE
+DD,,A Very Doughboys Christmas (Platinum Feed),NA,2018-12-27,"",originally released the prior Christmas,"",FALSE
+DD,,The Golden Paw Club #1: Flannigan,NA,2019-01-02,"","","",FALSE
+DD,,Blue Velvet & Chew Year's Playlist,Jen Zaborowski,2019-01-08,"","","",FALSE
+185,4.58,Poquito Más,Dan Goor,2019-01-10,Faraway Friends Club,"",,FALSE
+DD,,Biggie Feedbag IX,Yusong Liu,2019-01-15,"","","",FALSE
+186,2.92,Delta Sky Club,John Hodgman,2019-01-17,"",recorded at LAX,,FALSE
+DD,,Bacon Maple Gremlins,Nicole Byer,2019-01-22,"","","",FALSE
+187,4.5,The Hat,"Betsy Sodaro, Mano Agapion",2019-01-24,Golden Plate Club,recorded live at the Brea Improv,,TRUE
+DD,,"Little Caesar, Big Game",Ryan Meharry,2019-01-29,"",Little Caesar's Pretzel Crust Pizza,"",FALSE
+188,4.67,Cheba Hut,Jon Gabrus,2019-01-31,Golden Dank Club,"recorded live in Phoenix, AZ",,TRUE
+DD,,"Korn Koffee, Fyre Roasted",Emily Fleming,2019-02-05,Dinner is the Movie,Fyre and Fyre Fraud,"",FALSE
+189,2.75,Super Duper Burgers,"Eliza Skinner, Jordan Morris",2019-02-07,"",recorded live at SF Sketchfest,,TRUE
+DD,,"Valentine's Day, Actually",Ify Nwadiwe,2019-02-12,Dinner is the Movie,Love Actually,"",FALSE
+190,4.08,Smoke's Poutinerie,Alana Johnston 🔪,2019-02-14,Golden Plate Club,"recorded live in Saskatoon, Saskatchewan",,TRUE
+DD,,The Wonderful World of Water,Dave Theune,2019-02-19,"","","",FALSE
+191,4.42,Little Caesars,John Ross Bowie,2019-02-21,Golden Plate Club,"",,FALSE
+DD,,Biggie Feedbag X,Yusong Liu,2019-02-26,"","","",FALSE
+192,2.125,Native Foods,"Tawny Newsome, Alex Kliner",2019-02-28,"","",,FALSE
+DD,,Munch Madness: Green Burrito/Red Burrito vs. Poquito Mas,Farley Elliott,2019-03-05,"",Mouth of the Border: Hollywood vs. Heartland region,Winner: Poquito Mas,FALSE
+193,,Munch Madness: Chipotle vs. Qdoba,Toni Charline,2019-03-07,"",Mouth of the Border: Fast Casual region,Winner: Qdoba,FALSE
+DD,,Fat Chance Kitchen: Chipotle vs. Green Burrito,NA,2019-03-12,"",Mouth of the Border: Loser's Bracket round 1 (guest: Ryan Perez),"Winner:
+Chipotle",FALSE
+194,,Munch Madness: Poquito Más vs. Taco Bell,Mike Hanford,2019-03-14,"",Mouth of the Border: Semifinal round 1,"Winner:
+Taco Bell",FALSE
+DD,,Fat Chance Kitchen: Poquito Más vs. Chipotle,NA,2019-03-19,"",Mouth of the Border: Loser's Bracket round 2 (guest: Jennie Pierson),Winner: Poquito Más,FALSE
+195,,Munch Madness: Qdoba vs. Del Taco,Matt Apodaca,2019-03-21,"",Mouth of the Border: Semifinal round 2,Winner: Qdoba,FALSE
+DD,,Fat Chance Kitchen: Del Taco vs. Poquito Más,Mary Sohn,2019-03-26,"",Mouth of the Border: Loser's Bracket final,Winner: Poquito Más,FALSE
+196,,Munch Madness: Poquito Más vs. Qdoba vs. Taco Bell,Nicole Byer,2019-03-28,"",Mouth of the Border: Finale (live episode),Winner: Taco Bell,FALSE
+DD,,Biggie Feedbag XI,"Yusong Liu, Emma Erdbrink",2019-04-02,"","","",FALSE
+197,3.5,Sizzle Pie,Bill Oakley,2019-04-04,"","live in Portland, Oregon",,TRUE
+DD,,R U Talkin' JRPG's to Me?,Zach Reino,2019-04-09,"",Naruto Ramune sodas,"",FALSE
+198,4.625,Portillo's,"Jon Gabrus, Christine Nangle",2019-04-11,Golden Plate Club,"recorded live in Chicago, IL",,TRUE
+DD,,The Snacklog & The Catlog,Sydney Steinberg,2019-04-16,"","","",FALSE
+199,4,Lou Malnati's,"Jon Gabrus, Christine Nangle",2019-04-18,"","recorded live in Chicago, IL",,TRUE
+DD,,Game of P'Zones,Griffin Newman,2019-04-23,"","","",FALSE
+200,3.83,Chili's Too,Eva Anderson,2019-04-25,"",Episode 200!,,FALSE
+DD,,Mitchell-adas,"Agata Monica, Anastasia Vigo",2019-04-30,"",Burger King's Angry Whopper,"",FALSE
+201,3.375,AMC Dine-In,"Kevin Pollak, Jaime Fox",2019-05-02,"","",,FALSE
+DD,,May-ow: Digby,Libby Watson,2019-05-07,"","","",FALSE
+202,4.33,Sweetfin Poké with Payman Benz,NA,2019-05-09,Golden Plate Club,"",,FALSE
+DD,,May-ow: Bug,Jordan Morris,2019-05-14,Dinner Is The Movie,The Aristocats and hybrid mayo flavors,"",FALSE
+203,4.75,Waffle House,Carl Tart,2019-05-16,Platinum Plate Club,"live in Huntsville, Alabama. Score updated to 5.0 and put in Platinum Plate Club in ep. 205.",,TRUE
+DD,,May-ow: Cat Stevens,Yusong Liu,2019-05-21,"",Doughcats: The Musical,"",FALSE
+204,4.33,Hattie B's,Carl Tart,2019-05-23,Golden Plate Club,"live in Nashville, Tennessee",,TRUE
+DD,,"May-ow: Pepe, Fiona, and Meryl with Joe Saunders & Rachel Millman",NA,2019-05-28,"",Heathcliff comics,"",FALSE
+205,3.08,P. F. Chang's 2,Kulap Vilaysack,2019-05-30,"",Mitch's Lettuce Rap,,FALSE
+BC5,,Pumpernickel Bread,Diona Reasonover,2019-05-31,The Bread Cast,"","",FALSE
+DD,,or Nothing,Mike Carlson,2019-06-04,"",Star Wars: Galaxy Edge and AEW wrestling,"",FALSE
+206,3.06,Fogo de Chão,"Candice King, Kayla Ewell",2019-06-06,"","",,FALSE
+BC6,,Dinner Rolls,the Sloppy Boys,2019-06-07,The Bread Cast,"","",FALSE
+DD,,WWE Cook-off and Biggie Feedbag XII,"Yusong Liu, Emma Erdbrink",2019-06-11,"","","",FALSE
+207,3.71,Ben & Jerry's,The Sloppy Boys,2019-06-13,"","Jeff Dutton, Mike Hanford, Tim Kalpakis",,FALSE
+BC7,,Cornbread,Alana Johnston 🔪,2019-06-13,The Bread Cast,"(unlike other Bread Cast eps, not put in the Doughboys Double stream)","",FALSE
+DD,,Wetzel's Pretzels,"Sean Clements, Hayes Davenport",2019-06-18,"",live from Los Angeles at the Pee Cast Blast 2018,"",TRUE
+208,2.1,Al's Beef,"Megan Batoon, Amir Blumenfeld",2019-06-20,"",live from Chicago at Headgum Live,,TRUE
+DD,,Beyond Chicago,Fran Gillespie,2019-06-25,"",Carl's Jr. Beyond Famous Star and a Chicago Draft,"",FALSE
+209,3.5,Which Wich?,Josh Gondelman,2019-06-27,"","",,FALSE
+BC8,,Live at BugCon,"Farley Elliott, Evan Susser",2019-06-27,The Bread Cast,"","",FALSE
+DD,,From Sea to Shining McD,Jack Allison,2019-07-02,"",McDonald's Worldwide Favorite Menu and Fourth of July films,"",FALSE
+210,1.17,Starbucks Reserve,Jessica Chaffin,2019-07-04,"","",,FALSE
+DD,,Quiznos Quiz Show,Mark Rennie,2019-07-09,Dinner Is The Movie,Quiznos sandwiches and Quiz Show,"",FALSE
+211,2.8,Papa Gino's,"John Hodgman, Jean Grae, Jeff Tweedy",2019-07-11,"","live from Solid Sound Festival in North Adams, MA",,FALSE
+DD,4.13,Friendly's,"John Hodgman, Jean Grae",2019-07-16,"","live from Solid Sound Festival in North Adams, MA",,FALSE
+212,3.75,Le Pain Quotidien,Johnny Pemberton,2019-07-18,"","The ""oven fries"" episode",,FALSE
+DD,,Shaq's Shaqting Career,Amir Blumenfeld,2019-07-23,Shaq Week / Dinner is the Movie,Kazaam,"",FALSE
+213,3.83,Shaquille's,Josh Weiner,2019-07-25,Shaq Week,"",,FALSE
+DD,,Biggie Feedbag XIII,"Yusong Liu, Emma Erdbrink",2019-07-30,"",Rainbow Dark chips and Doritos Jacked chips,"",FALSE
+214,3.25,Subway 2,R.J. Fried,2019-08-01,"","",,FALSE
+DD,,Snack Attack,"Mac, aka Max Mayer",2019-08-06,"","Sour Patch Kid ice cream, Taco Bell chips, a ba-na-na","",FALSE
+215,4.125,Del Taco 2,"Kevin Bartelt, Yusong Liu",2019-08-08,"",Del Taco's Beyond Meat menu,,FALSE
+DD,,Dough and Cait Plus Eggs,Cait Raft,2019-08-13,"","","",FALSE
+216,4.25,Lee's Sandwiches,Ify Nwadiwe,2019-08-15,"","",,FALSE
+DD,,Me Talkin' 'Tallica to U? (Me = Wiger),NA,2019-08-20,"",Kill 'Em All and Grill 'Em All,"",FALSE
+217,3.67,Burger King 3,Haley Mancini,2019-08-22,"",Burger King's Impossible Burger,,FALSE
+DD,,Biggie Feedbag XIV,"Yusong Liu, Emma Erdbrink",2019-08-27,"","","",FALSE
+218,4.67,Popeyes Louisiana Kitchen 2,Andrew Ti,2019-08-29,Golden Plate Club,"",,FALSE
+DD,,The Snacklog,Adam Chandler,2019-09-03,"","","",FALSE
+219,4.875,Ben's Chili Bowl,"Christine Nangle, Carl Tart",2019-09-05,Golden Plate Club,"Feast Coast Tour 2019: live from Washington, DC. Also with guest Stormy Daniels.",,TRUE
+DD,,Feast Coast Tour Diary: Comet Ping Pong,NA,2019-09-10,"","Feast Coast Tour 2019: from Washington, DC AirBnB.","",FALSE
+220,3.375,CAVA,"Jamelle Bouie, Carl Tart, Libby Watson",2019-09-12,"","Feast Coast Tour 2019: live from Washington, DC.",,TRUE
+DD,4.81,Wawa,"Carl Tart, Christine Nangle",2019-09-17,Golden Plate Club,Feast Coast Tour 2019: live from Philadelphia. Also with guest Jon Taffer.,,TRUE
+221,3.83,Marie Callender's,Scott Aukerman,2019-09-19,"","",,FALSE
+DD,4.575,Xi'an Famous Foods,"Mike Hanford, Paul Rust",2019-09-24,"","Feast Coast Tour 2019: live from New York City.
+Also with guest The Soup Nazi.",,TRUE
+222,4.19,Rita's Italian Ice,"Carl Tart, Christine Nangle",2019-09-26,Golden Plate Club,Feast Coast Tour 2019: live from Philadelphia.,,TRUE
+DD,,Octdoughberfest 2019: The Ate-TL: World of Coca-Cola,NA,2019-10-01,"","","",FALSE
+223,3.75,Octdoughberfest 2019: The Ate-TL: The Flying Biscuit Cafe,Steve Agee,2019-10-03,Golden Plate Club,rating adjusted and removed from the Golden Plate Club in #224.,,FALSE
+DD,,Octdoughberfest 2019: The Ate-TL: Peaches and Scream,"Jen D'Angelo, Samantha Nisenboim",2019-10-08,"",Peach dishes & Mount Scaremore,"",FALSE
+224,1.58,Octdoughberfest 2019: The Ate-TL: Moe's Southwest Grill,Mary Lynn Rajskub,2019-10-10,"","",,FALSE
+DD,,Octdoughberfest 2019: The Ate-TL: The Doughboys Went Down To Georgia,NA,2019-10-15,"",Hot Music from Hot-Lanta,"",FALSE
+225,4.5,Octdoughberfest 2019: The Ate-TL: The Varsity with Joe Saunders,NA,2019-10-17,Golden Plate Club,"",,FALSE
+DD,,Octdoughberfest 2019: The Ate-TL: Deliveryance,NA,2019-10-22,Dinner is the Movie,Halloween cereals and Deliverance,"",FALSE
+226,2.75,Octdoughberfest 2019: The Ate-TL: Krystal,Sam Richardson,2019-10-24,"","",,FALSE
+DD,,Octdoughberfest 2019: The Ate-TL: Biggie Feedbag XV,"Yusong Liu, Emma Erdbrink",2019-10-29,"","","",FALSE
+227,4.69,Octdoughberfest 2019: The Ate-TL: Cook Out,"Jesse Farrar, Mike Hale",2019-10-31,Golden Plate Club,"",,FALSE
+DD,,The Twisted World of Pretzels,NA,2019-11-05,"",Burger King's Pretzel Bacon King,"",FALSE
+228,2.9,White Castle,"Mike Hanford, Paul Rust, Fran Gillespie",2019-11-07,"",Feast Coast Tour 2019: live from New York City.,,TRUE
+DD,,Remember Pepperidge Farm? Doughboys Remembers,NA,2019-11-12,"",Pepperidge Farm snacks,"",FALSE
+229,5,Regina Pizzeria,"John Hodgman, Nicole Byer",2019-11-14,Platinum Plate Club,Feast Coast Tour 2019: live from Boston.,,TRUE
+DD,,Let's Faygo,"Street Fight Radio, Brett Payne, Bryan Quinby",2019-11-19,"","","",FALSE
+230,2.13,99 Restaurant,"Nicole Byer, Dano",2019-11-21,"",Feast Coast Tour 2019: live from Boston.,,TRUE
+DD,,Garfield's Thanksgiving,Paul Rust,2019-11-26,Dinner is the Movie,"","",FALSE
+DD,,Biggie Feedbag XVI,Emma Erdbrink,2019-12-03,"","","",FALSE
+231,2.83,Noah's New York Bagels,Jennie Pierson,2019-12-05,"","",,FALSE
+DD,,The 12 Days of Christmas Cookies,Ryan Perez,2019-12-10,"",Mount Rushmores of Christmas Movies,"",FALSE
+232,4.5,Ample Hills Creamery,Jason Sheridan,2019-12-12,Creamsmen: The Golden Circle,"",,FALSE
+DD,,The Doughboys Christmas Singalong!,NA,2019-12-17,"","","",FALSE
+233,3.75,Steak 'n Shake 4,Evan Susser,2019-12-19,"","",,FALSE
+DD,,It's A Wigerful Life: A Doughboys Christmas Special,NA,2019-12-24,"","","",FALSE
