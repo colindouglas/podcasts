@@ -1,4 +1,6 @@
 ---
+title: CBB Best Ofs Episodes
+date: "`r format(Sys.time(), '%d-%B-%Y')`"
 output: rmarkdown::github_document
 ---
 
@@ -7,8 +9,6 @@ knitr::opts_chunk$set(echo = TRUE)
 source("cbb-scrape-earwolf.R")
 source("cbb-treatment.R")
 ```
-
-# Overview
 
 Comedy Bang Bang is an alt-comedy improv podcast published at least weekly since 2009. Each episode features one or more guests, who may be playing themselves or an improvised character. As of `r Sys.Date()`, there have been `r nrow(cbb)` mainline episodes with `r length(unique(all_guests))` unique guests.
 
