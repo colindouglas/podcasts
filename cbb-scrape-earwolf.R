@@ -9,8 +9,10 @@ startFresh <- FALSE
 
 if (startFresh) { 
   ### Make an empty dataframe
-  episode <- data_frame()
+  episode <- tibble()
   ### The first episode
+  
+  # TODO: General this across a bunch of different Earwolf podcasts 
   next_ep <- "http://www.earwolf.com/episode/welcome-to-comedy-bang-bang/"
   
 } else {
