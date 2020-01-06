@@ -1,24 +1,17 @@
-# Invoke some libraries ---------------------------------------------------
-
 library(tidyverse)
 library(lubridate)
 library(ggthemes)
 
-### Define a function to check if a given element is in a column of lists
-### Example: episode$number[in.list("Lauren Lapkus", episode$guests)]
-### returns all of the episode numbers with Lauren Lapkus
-in.list <- function(element, list) {
-  sapply(list, is.element, el = element)
-}
-
 # Import the data ---------------------------------------------------------
+
+# Load the RDA, which contains a dataframe called "earwolf_podcasts"
+load(file = "data/earwolf_podcasts.Rda")
 
 ### Episode numbers of the Best Of'd episodes
 BOs <- read_csv("data/cbb_bestof-episodes.csv") %>%
   pull(number)
 
-load(file = "data/earwolf_podcasts.Rda")
-
+# Clean up the Earwolf podcasts so there are only CBB podcasts
 cbb <- earwolf_podcasts %>%
   filter(podcast == "Comedy Bang Bang", 
          !grepl("vote", title, ignore.case = TRUE) # Remove the entries that are just calls to vote in the Best Of's
@@ -47,12 +40,9 @@ for (i in 1:nrow(cbb_bo)) bo_guests <- c(bo_guests, cbb_bo$guests[[i]])
 # Make the plot -----------------------------------------------------------
 
 # The start of each month relative to day 325 (Thanksgiving-ish)
-
 month_starts <- paste0(1:12, "-01-2018") %>% mdy() %>% yday()
 month_starts[month_starts < 325] <- month_starts[month_starts < 325] + 365
 month_starts <- month_starts - 325
-
-
 
 ### How big are the dots in the plot
 dot_size <- 2
@@ -65,6 +55,8 @@ colors <- c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ff7f00", "#8dd3c7", "#
 
 ### A dummy table to hack together a legend
 dummy_table <- data.frame(x=1:9, y=2008)
+
+
 
 ### Find the top 9 guests and how many episodes they've appeared in
 top_guests <- names(sort(table(bo_guests), decreasing = T)[1:9])
@@ -104,7 +96,7 @@ cbb_bestof_plot <- ggplot(cbb) +
   
   ### Draw a vertical line at Thanksgiving (Day 325) and label it
   annotate("text", x = 0, y = 2009-6*offset, label = "Thanksgiving", size = 2.5, color="darkgrey", vjust=0) +
-  geom_segment(color="darkgrey", lty=2, aes(x = 0, y = 2008.5, xend = 0, yend = 2020.5)) +
+  geom_segment(color="darkgrey", lty=2, aes(x = 0, y = 2008.5, xend = 0, yend = max(cbb$BO_year) + .5)) +
   
   ### Add a title and a subtitle.
   ggtitle("Top Comedy Bang Bang Guests by Episode", subtitle = str_glue("Updated {Sys.Date()} // Best Of'd Episodes Highlighted"))

@@ -16,11 +16,8 @@ with the show’s host, Scott Aukerman.
 In 2017, there was a lot of Scott-and-Paul talk in the Best Ofs about
 the frequency in which Paul appears in Best Of’d episodes, I decided to
 test whether this was because Paul makes episodes good, or it he’s just
-in a lot of episodes. To do this, I used the statistical computing
-package R, alongside the tidyverse and rvest packages.
-
-I scraped the data directly from the Earwolf website using the
-`scrape-earwolf.R`, and then created the image via
-`cbb_bestof-figure.R`.
+in a lot of episodes. To do this, I scraped the data directly from the
+Earwolf website using the `scrape-earwolf.R`, and then created the image
+via `cbb_bestof-figure.R`.
 
 ![](images/cbb-bestof-plot-1.png)<!-- -->
