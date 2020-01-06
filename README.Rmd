@@ -16,7 +16,7 @@ Comedy Bang Bang is an alt-comedy improv podcast published at least weekly since
 
 At the end of the year, listeners vote on the best episodes of the year (Thanksgiving-to-Thanksgiving), which are compiled in year-end Best Of episodes that are published over the Christmas-New Year break. Paul F. Tompkins, the most frequent CBB guest, typically cohosts these shows with the show's host, Scott Aukerman.
 
-In 2017, there was a lot of Scott-and-Paul talk in the Best Ofs about the frequency in which Paul appears in Best Of'd episodes, I wanted to visualize the data to see whether this was because Paul makes episodes good, or it he's just in a lot of episodes. To do this, I scraped the data directly from the Earwolf website using the `scrape-earwolf.R`, and then created the image via `cbb-bestof-figure.R`.
+I scraped the data directly from the Earwolf website using the `scrape-earwolf.R`, and then created the image via `cbb-bestof-figure.R`. The top 9 most frequently Best Of'd guests are highlighted by color, and the Best Of episodes are shaded grey.
 
 ```{r cbb-bestof-plot, fig.width = 12, fig.height = 6, warning = FALSE}
 cbb_bestof_plot
