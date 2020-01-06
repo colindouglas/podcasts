@@ -1,11 +1,11 @@
 CBB Best Ofs Episodes
 ================
-31-December-2019
+05-January-2020
 
 Comedy Bang Bang is an alt-comedy improv podcast published at least
 weekly since 2009. Each episode features one or more guests, who may be
-playing themselves or an improvised character. As of 2019-12-31, there
-have been 676 mainline episodes with 481 unique guests.
+playing themselves or an improvised character. As of 2020-01-05, there
+have been 677 mainline episodes with 478 unique guests.
 
 At the end of the year, listeners vote on the best episodes of the year
 (Thanksgiving-to-Thanksgiving), which are compiled in year-end Best Of
@@ -20,8 +20,7 @@ in a lot of episodes. To do this, I used the statistical computing
 package R, alongside the tidyverse and rvest packages.
 
 I scraped the data directly from the Earwolf website using the
-`cbb-scrape-earwolf.R`, and then created the image via
-`cbb-treatment.R`.
+`scrape-earwolf.R`, and then created the image via
+`cbb_bestof-figure.R`.
 
-![Top Comedy Bang Bang Guests by
-Episode](https://github.com/colindouglas/podcasts/blob/master/images/cbb-bestof-plot.png)
+![](images/cbb-bestof-plot-1.png)<!-- -->
