@@ -151,7 +151,6 @@ starting_urls <- c(
   "https://www.earwolf.com/episode/sonic-06-with-jordan-morris/", # HDTGP
   "https://www.earwolf.com/episode/burlesque/", # HDTGM
   "https://www.earwolf.com/episode/9641/", # I4H
-  "https://www.earwolf.com/episode/firsts-with-bill-hader/", # In Bed
   "https://www.earwolf.com/episode/ep-1-shrugging-destiny-w-paul-f-tompkins/", # Off Book
   "https://www.earwolf.com/episode/the-pilot/", # Office Ladies
   "https://www.earwolf.com/episode/rhea-butcher/", # Queery
@@ -221,7 +220,8 @@ walk_over_podcasts <- function(urls) {
     
     # Append to Rda file to keep list-columns in tact
     load(file = "data/earwolf_podcasts.Rda")
-    earwolf_podcasts <- bind_rows(earwolf_podcasts, new_data)
+    earwolf_podcasts <- bind_rows(earwolf_podcasts, new_data) %>%
+      distinct(podcast, number, title, date, .keep_all = TRUE)
     save(earwolf_podcasts, file = "data/earwolf_podcasts.Rda")
     
     # Also write to CSV for compatibility
