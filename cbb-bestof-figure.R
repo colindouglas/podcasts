@@ -56,8 +56,6 @@ colors <- c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ff7f00", "#8dd3c7", "#
 ### A dummy table to hack together a legend
 dummy_table <- data.frame(x=1:9, y=2008)
 
-
-
 ### Find the top 9 guests and how many episodes they've appeared in
 top_guests <- names(sort(table(bo_guests), decreasing = T)[1:9])
 top_guests_table <- data.frame(sort(table(bo_guests), decreasing=T)[1:9])
@@ -74,7 +72,7 @@ cbb_bestof_plot <- ggplot(cbb) +
   )) +
   
   ### Set the transparency of the dots for T/F
-  scale_alpha_manual(values = c(0.05,0.8), guide=F) + 
+  scale_alpha_manual(values = c(0.05,0.5), guide=F) + 
   
   ### Flip the y axis around so earlier is at the top
   scale_y_reverse(breaks = min(cbb$BO_year):max(cbb$BO_year), name = "Year", limits=c(max(cbb$BO_year)+5*offset,min(cbb$BO_year)-6*offset)) +
