@@ -1,4 +1,4 @@
-TODAY="date +%Y-W%W"
+TODAY="date +%Y-w%W"
 
 Rscript scrape-earwolf.R
 
