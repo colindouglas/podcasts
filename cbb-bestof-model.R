@@ -21,18 +21,12 @@ cbb <- earwolf_podcasts %>%
 # How frequently must a guest appear in the training set to be relevant?
 frequent_enough <- function(x) {
   if (!is.logical(x)) return(TRUE)
-  sum(x) >= 5
-}
-
-# Function to translate best of position to relative worth
-rank_value <- function(n) {
-  alpha <- 0.5
-  1/(n^alpha) # Zipf's law.
+  sum(x) >= 3
 }
 
 # What is the range of years that we want to test?
 #current_era <- 2020:2017
-current_era <- 2019:2016
+current_era <- 2019:2015
 
 # Number of appearance by each guest
 appearances <- cbb %>%
@@ -49,13 +43,13 @@ cbb_wide <- cbb %>%
   reshape2::dcast(., number ~ guests, fun.aggregate = { function(x) as.logical(length(x))}, value.var = "guests") %>%
   left_join(select(BOs, number, rank), by = c("number")) %>%
   left_join(select(cbb, number, year), by = "number") %>%
-  mutate(rank_value = rank_value(rank)) %>%
   select(number, year, rank, everything()) 
 
 # Make rank an ordered factor, when unranked episodes are ranked one more than the last ranking
 last_rank <- max(cbb_wide$rank, na.rm = TRUE)
-cbb_wide$rank[is.na(cbb_wide$rank)] <- last_rank + 1
-cbb_wide$rank <- factor(cbb_wide$rank, ordered = TRUE, levels = (last_rank+1):1)
+#cbb_wide$rank[is.na(cbb_wide$rank)] <- last_rank + 1
+cbb_wide$rank[is.na(cbb_wide$rank)] <- NA
+cbb_wide$rank <- factor(cbb_wide$rank, ordered = TRUE, levels = (last_rank):1)
 
 # Fit using the "recent era" of Comedy Bang Bang, 2017 - 2019
 cbb_recent <- cbb_wide %>%
@@ -64,30 +58,17 @@ cbb_recent <- cbb_wide %>%
 
 # This training set, everything except this year
 cbb_train <- cbb_recent %>%
-  filter(year != year(now()))
+  filter(year != max(current_era))
 
 # The test set, episodes from this year
 cbb_test <- cbb_recent %>%
-  filter(year == 2019) 
+  filter(year == max(current_era)) 
 
-# Ordinal logistic regression
-model <- MASS::polr(
-  formula = rank ~ .,
-  data = select(cbb_train, -number, -year),
-  Hess = TRUE,
-  start = c(rep(0, times = ncol(cbb_train) - 3), 1:16) # These are bad and dumb starting conditions but at least it converges
-  )
-
-# Straight linear model, with values assigned to rank position
-#model <- lm(rank_value ~ ., data = select(cbb_train, -number, -year, -rank))
-
-# Splits
-zetas <- broom::tidy(model) %>%
-  filter(coefficient_type == "zeta")
+# Fit the model
+model <- glm(rank ~ ., data = select(cbb_train, -number, -year), family = binomial)
 
 # Coefficients
 coeffs <- broom::tidy(model) %>%
-  filter(coefficient_type != "zeta") %>%
   arrange(-estimate) %>%
   mutate(term = gsub("(`)|(`TRUE)", "", term)) %>%
   select(guest = term, estimate, std.error) %>%
@@ -100,10 +81,8 @@ predictions <- cbb_test %>%
   mutate(score = predict(model, newdata = cbb_test)) %>%
   left_join(cbb, by = "number") %>%
   select(score, number, title, date, guests) %>%
-  mutate(rank_estimate = case_when(
-           rank(-score) > last_rank ~ as.numeric(NA),
-           TRUE ~ rank(-score))
-         ) %>%
-  left_join(BOs, by = "number")
+  mutate(rank_estimate = rank(-score, ties.method = "first")) %>%
+  left_join(BOs, by = "number") %>%
+  mutate(diff = rank_estimate - rank)
 
         
