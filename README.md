@@ -1,11 +1,11 @@
 CBB Best Ofs Episodes
 ================
-06-January-2020
+15-January-2020
 
 Comedy Bang Bang is an alt-comedy improv podcast published at least
 weekly since 2009. Each episode features one or more guests, who may be
-playing themselves or an improvised character. As of 2020-01-06, there
-have been 678 mainline episodes with 478 unique guests.
+playing themselves or an improvised character. As of 2020-01-15, there
+have been 679 mainline episodes with 478 unique guests.
 
 At the end of the year, listeners vote on the best episodes of the year
 (Thanksgiving-to-Thanksgiving), which are compiled in year-end Best Of
