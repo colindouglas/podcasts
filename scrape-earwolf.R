@@ -89,8 +89,15 @@ scrape_earwolf <- function(url) {
     
     # Cache the episode photos and get the exif data
     exif_dates <- map_chr(photo_urls, possibly(function(url) {
+      
+      # If it's the attachment_id format, ignore it, it frequently hangs
+      if (grepl("attachment_id", url, ignore.case = TRUE)) return(NA) 
+      
+      # Make a folder for each podcast
       dir.create(paste0("data/photos/", podcast), showWarnings = FALSE, recursive = TRUE)
       filename <- tail(str_split(url, pattern = "/")[[1]], 1)
+      
+      # Name the file EP# - Original Filename
       destination <- paste0("data/photos/", podcast, "/", number, " - ", filename)
       if (!file.exists(destination)) {
         download.file(url, destfile = destination)
@@ -129,6 +136,7 @@ scrape_earwolf <- function(url) {
 
 # URLS to start off with, if the podcast has never been checked before
 starting_urls <- c(
+  # Current Podcasts
   "https://www.earwolf.com/episode/icelandic-meat/", # Urgent Care
   "https://www.earwolf.com/episode/firsts-with-bill-hader/", # In Bed with Nick and Megan
   "https://www.earwolf.com/episode/donating-plasma/", # Get Rich Nick
@@ -162,7 +170,14 @@ starting_urls <- c(
   "https://www.earwolf.com/episode/ts223-oj-simpsonkeshaleviticusguest-ross-mathews/", # Throwing Shade
   "https://www.earwolf.com/episode/to-space-but-further/", # Voyage to the Stars
   "https://www.earwolf.com/episode/jimmies/", # Yo Is This Racist
-  "https://www.earwolf.com/episode/citizen-kane/" # Unspooled
+  "https://www.earwolf.com/episode/citizen-kane/", # Unspooled
+  # Archived Podcasts
+  "https://www.earwolf.com/episode/hand-putty/", # Affirmative Nation
+  "https://www.earwolf.com/episode/phish-101/", # Analyze Phish
+  "https://www.earwolf.com/episode/the-wit-and-wisdom-of-the-west-with-dalton-wilcox/", # ADPPP
+  "https://www.earwolf.com/episode/larry-david/", # By the Way
+  "https://www.earwolf.com/episode/1-goodfellas/", # The Canon
+  "https://www.earwolf.com/episode/christopher-guest-2/" # Crybabies
   )
 
 # Randomize the order
