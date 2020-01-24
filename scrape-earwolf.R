@@ -79,7 +79,10 @@ scrape_earwolf <- function(url) {
     ### Get the episode guests (there can be multiple)
     guest <- html_scrape %>%
       html_nodes(".clearfix") %>%
-      html_text() 
+      html_text()
+    
+    # If there's no guests, return NA instead of list(character(0))
+    guests <- ifelse(length(guest) == 0, as.character(NA), guest)
     
     ### Get the episode photos if they exist
     photo_urls <- html_scrape %>%
@@ -110,7 +113,7 @@ scrape_earwolf <- function(url) {
       } else {
         as.character(NA)
       }
-    }, otherwise = NA))
+    }, otherwise = as.character(NA)))
     
     # If there are multiple exif dates, take the earliest one
     if (sum(!is.na(exif_dates)) > 0) {
@@ -139,7 +142,6 @@ starting_urls <- c(
   # Current Podcasts
   "https://www.earwolf.com/episode/icelandic-meat/", # Urgent Care
   "https://www.earwolf.com/episode/firsts-with-bill-hader/", # In Bed with Nick and Megan
-  "https://www.earwolf.com/episode/donating-plasma/", # Get Rich Nick
   "https://www.earwolf.com/episode/ron-pauls-baby/", # Beautiful / Anonymous
   "https://www.earwolf.com/episode/nicole-was-gonna-ride-an-alligator/", # Best Friends
   "https://www.earwolf.com/episode/theyre-pine-nuts-with-klaus-kendall-paul-f-tompkins/", # Teacher's Lounge
@@ -236,7 +238,7 @@ walk_over_podcasts <- function(urls) {
     # Append to Rda file to keep list-columns in tact
     load(file = "data/earwolf_podcasts.Rda")
     earwolf_podcasts <- bind_rows(earwolf_podcasts, new_data) %>%
-      distinct(podcast, number, title, date, .keep_all = TRUE)
+      distinct(podcast, number, title, date, .keep_all = TRUE) 
     save(earwolf_podcasts, file = "data/earwolf_podcasts.Rda")
     
     # Also write to CSV for compatibility
