@@ -17,7 +17,7 @@ cbb <- earwolf_podcasts %>%
          !grepl("vote", title, ignore.case = TRUE) # Remove the entries that are just calls to vote in the Best Of's
          ) %>%
   mutate(year = year(date),
-         guest_count = lengths(guests),
+         #guest_count = lengths(guests),
          BO = number %in% BOs,
          BO_year = year(date + days(40)), # If it's after Thanksgiving, it counts in nexy year's best of's
          thanksgiving = as_date(325, origin = paste0(BO_year - 1, "-01-01")),

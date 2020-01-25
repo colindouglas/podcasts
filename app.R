@@ -2,7 +2,7 @@ library(shiny)
 library(tidyverse)
 
 # Load, process data
-load("../data/earwolf_podcasts.Rda")
+load("./data/earwolf_podcasts.Rda")
 
 guests <- earwolf_podcasts %>%
   unnest_longer(guests)
@@ -18,10 +18,12 @@ podcasts <- guests %>%
 guest_freq <- guests %>%
   filter(!is.na(guests)) %>%
   count(guests) %>%
-  arrange(-n) %>%
-  mutate(color = rep_len(viridis::plasma(n = 20), length.out = n()),
-         color = ifelse(n >= 5, color, "#696969"))
+  arrange(-n)
 
+most <- log2(max(guest_freq$n))
+least <- log2(min(guest_freq$n))
+
+guest_freq$color <- viridis::viridis_pal(begin = 0, end = 0.9)(20)[floor(log2(guest_freq$n)/most * 19) + 1]
 guest_colors <- guest_freq$color
 names(guest_colors) <- guest_freq$guests
 
