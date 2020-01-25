@@ -24,9 +24,9 @@ failures <- c()
 # Generalized Earwolf scraper
 # Give it a URL and it will scrape all of the episodes from that episode onwards
 scrape_earwolf <- function(url) {
-    episode <- tibble()
-    next_ep <- url
-    
+  episode <- tibble()
+  next_ep <- url
+  
   while (length(next_ep) > 0) { # The next episode will be character(0) once it gets to the final episode
     #Sys.sleep(2)
     
@@ -37,7 +37,7 @@ scrape_earwolf <- function(url) {
     if (is.na(html_scrape)) {
       next 
     } else {
-    # If the request succeeded, remove the URL from the vector of failures
+      # If the request succeeded, remove the URL from the vector of failures
       if (next_ep %in% failures) {
         failures <<- failures[failures != next_ep]
       } 
@@ -79,10 +79,11 @@ scrape_earwolf <- function(url) {
     ### Get the episode guests (there can be multiple)
     guest <- html_scrape %>%
       html_nodes(".clearfix") %>%
-      html_text()
+      html_text() %>%
+      head(1)
     
     # If there's no guests, return NA instead of list(character(0))
-    guests <- ifelse(length(guest) == 0, as.character(NA), guest)
+    guest <- ifelse(length(guest) == 0, as.character(NA), guest)
     
     ### Get the episode photos if they exist
     photo_urls <- html_scrape %>%
@@ -102,9 +103,10 @@ scrape_earwolf <- function(url) {
       
       # Name the file EP# - Original Filename
       destination <- paste0("data/photos/", podcast, "/", number, " - ", filename)
-      if (!file.exists(destination)) {
-        download.file(url, destfile = destination)
-      }
+      tryCatch(expr = { download.file(url, destfile = destination) },
+               error = function(x) { return(NA) },
+               warning = function(x) { return(NA) }
+      )
       
       exif_df <- exifr::read_exif(destination, tags = c("CreateDate"))
       
@@ -132,13 +134,23 @@ scrape_earwolf <- function(url) {
     ### Find the next episode URL
     next_ep <- html_scrape %>% 
       html_nodes(".nextepisodelink") %>% 
-      html_attr('href')
+      html_attr('href') %>%
+      head(1)
+    
+    # Test for loops due to Earwolf's broken website
+    # They don't work if the next_ep is character(0), so check for that first
+    if (length(next_ep) != 0) {
+      if (next_ep == "https://www.earwolf.com/episode/" | next_ep %in% episode$url | length(next_ep) > 1) {
+        warning("Aborted from loop: ", next_ep)
+        break
+      } 
+    }
   }
-    return(episode)
+  return(episode)
 }
 
 # URLS to start off with, if the podcast has never been checked before
-starting_urls <- c(
+starting_current <- c(
   # Current Podcasts
   "https://www.earwolf.com/episode/icelandic-meat/", # Urgent Care
   "https://www.earwolf.com/episode/firsts-with-bill-hader/", # In Bed with Nick and Megan
@@ -172,15 +184,59 @@ starting_urls <- c(
   "https://www.earwolf.com/episode/ts223-oj-simpsonkeshaleviticusguest-ross-mathews/", # Throwing Shade
   "https://www.earwolf.com/episode/to-space-but-further/", # Voyage to the Stars
   "https://www.earwolf.com/episode/jimmies/", # Yo Is This Racist
-  "https://www.earwolf.com/episode/citizen-kane/", # Unspooled
-  # Archived Podcasts
+  "https://www.earwolf.com/episode/citizen-kane/") # Unspooled
+# Archived Podcasts
+
+starting_archive <- c(
   "https://www.earwolf.com/episode/hand-putty/", # Affirmative Nation
   "https://www.earwolf.com/episode/phish-101/", # Analyze Phish
   "https://www.earwolf.com/episode/the-wit-and-wisdom-of-the-west-with-dalton-wilcox/", # ADPPP
   "https://www.earwolf.com/episode/larry-david/", # By the Way
   "https://www.earwolf.com/episode/1-goodfellas/", # The Canon
-  "https://www.earwolf.com/episode/christopher-guest-2/" # Crybabies
-  )
+  "https://www.earwolf.com/episode/christopher-guest-2/", # Crybabies
+  "https://www.earwolf.com/episode/0-getting-into-the-denzelishness/", # Denzel Washington
+  "https://www.earwolf.com/episode/first-is-the-worst-w-chris-gethard-anna-drezen/", # Dr Gameshow
+  "https://www.earwolf.com/episode/the-fogelnest-files-1/", # Fogelnest Files
+  "https://www.earwolf.com/episode/163-w-mark-hoppus/", # Get Up On This
+  "https://www.earwolf.com/episode/5-marty-allen/", # Gilbert Gottfried
+  "https://www.earwolf.com/episode/will-forte/", # Happy Sad Confused
+  "https://www.earwolf.com/episode/kattany-and-zooey/", # Hooray Show
+  "https://www.earwolf.com/episode/there-will-be-blood-with-paul-f-tompkins/", # I Was There Too
+  "https://www.earwolf.com/episode/episode-i/", # In Voorhees We Trust
+  "https://www.earwolf.com/episode/episode-1-the-richardsonian-method-of-dream-analysis/", # In Your Dreams
+  "https://www.earwolf.com/episode/conan-obrien-ben-sinclair-jordan-schlansky-jose-arroyo/", # Inside Conan
+  "https://www.earwolf.com/episode/episode-001-dr-no-with-paul-f-tompkins/", # James Bonding
+  "https://www.earwolf.com/episode/the-stump/", # John Levenstein
+  "https://www.earwolf.com/episode/levar-burton/", # Kevin Pollak
+  "https://www.earwolf.com/episode/a-new-day-in-brown-america/", # Kondabolu Brothers
+  "https://www.earwolf.com/episode/18-robot-films/", # Malton on Movies
+  "https://www.earwolf.com/episode/self-driving-me-to-divorce/", # My Dead Wife
+  "https://www.earwolf.com/episode/let-the-game-begin/", # Nerd Poker
+  "https://www.earwolf.com/episode/jon-hamm-2/", # Never Not Funny
+  "https://www.earwolf.com/episode/nocturnal-emotions-1/", # Nocturnal Emotions
+  "https://www.earwolf.com/episode/obscure-episode-1/", # Obscure
+  "https://www.earwolf.com/episode/pistol-shrimps-4-21-15/", # Pistol Shrimps Radio
+  "https://www.earwolf.com/episode/patrisse-khan-cullors-on-black-lives-matter-resistance-under-45/", # Politically Re-active
+  "https://www.earwolf.com/episode/emma-willmann-liz-miele-devon-walker-and-hosts-cameron-esposito-and-rhea-butcher/", # Put Your Hands Together
+  "https://www.earwolf.com/episode/welcome-to-qod-why-work-a-nine-to-six-job/", # Question of the Day
+  "https://www.earwolf.com/episode/lets-get-going/", # Questions for Lennon
+  "https://www.earwolf.com/episode/the-first-one/", # Raised by TV
+  "https://www.earwolf.com/episode/julie-klausner/", # Ronna and Beverly
+  "https://www.earwolf.com/episode/freelancer-or-entrepreneur/", # Startup School
+  "https://www.earwolf.com/episode/welcome-to-sklarbro-country/", # Sklarbro Country
+  "https://www.earwolf.com/episode/a-dennys-parking-lot/", # Spont
+  "https://www.earwolf.com/episode/1-p-kat-w-paul-f-tompkins-and-katelyn-tarver/", # Supergroup
+  "https://www.earwolf.com/episode/ep-1-home-is-where-the-wife-is/", # The Complete Woman
+  "https://www.earwolf.com/episode/the-problem-with-louie-anderson/", # The Problem With
+  "https://www.earwolf.com/episode/intro-topics/", # Topics
+  "https://www.earwolf.com/episode/and-so-it-begins/", # Totally Laime
+  "https://www.earwolf.com/episode/welcome-to-who-charted/", # Who Charted
+  "https://www.earwolf.com/episode/public-domain-with-paul-f-tompkins/", # With Special Guest
+  "https://www.earwolf.com/episode/who-makes-up-earwolf/", # The Wolf Den
+  "https://www.earwolf.com/episode/jason-mantzoukas-seth-morris-spotlight-on-dr-lionel-drioche/" # WOMP It Up
+)
+
+starting_urls <- c(starting_current) #, starting_archive)
 
 # Randomize the order
 starting_urls <- sample(starting_urls)
@@ -215,15 +271,15 @@ walk_over_podcasts <- function(urls) {
         pull(url)
       
       # Just in case of 500s
-       html_scrape <- safe_read_html(last_url) 
-
-       if (!is.na(html_scrape)) {
-         start_url <- html_scrape %>%
-           html_nodes(".nextepisodelink") %>% 
-           html_attr('href')
-       } else {
-         failures <<- c(failures, last_url)
-       }
+      html_scrape <- safe_read_html(last_url) 
+      
+      if (!is.na(html_scrape)) {
+        start_url <- html_scrape %>%
+          html_nodes(".nextepisodelink") %>% 
+          html_attr('href')
+      } else {
+        failures <<- c(failures, last_url)
+      }
     }
     
     # If there's no new episodes, return nothing and print a message
