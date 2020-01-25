@@ -23,7 +23,10 @@ guest_freq <- guests %>%
 most <- log2(max(guest_freq$n))
 least <- log2(min(guest_freq$n))
 
-guest_freq$color <- viridis::viridis_pal(begin = 0, end = 0.9)(20)[floor(log2(guest_freq$n)/most * 19) + 1]
+guest_freq <- guest_freq %>%
+  mutate(color = viridis::viridis_pal(begin = 0, end = 0.9)(20)[floor(log2(guest_freq$n)/most * 19) + 1],
+         color = ifelse(n == 1, "#696969", color))
+
 guest_colors <- guest_freq$color
 names(guest_colors) <- guest_freq$guests
 
