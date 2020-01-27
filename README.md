@@ -1,32 +1,20 @@
-CBB Best Ofs Episodes
-================
-24-January-2020
+---
+title: CBB Best Ofs Episodes
+date: "27-January-2020"
+output: github_document
+---
+
 
 ## Comedy Bang Bang Appearances
+Comedy Bang Bang is an alt-comedy improv podcast published at least weekly since 2009. Each episode features one or more guests, who may be playing themselves or an improvised character. As of 2020-01-27, there have been 682 mainline episodes with 483 unique guests.
 
-Comedy Bang Bang is an alt-comedy improv podcast published at least
-weekly since 2009. Each episode features one or more guests, who may be
-playing themselves or an improvised character. As of 2020-01-24, there
-have been 681 mainline episodes with 483 unique guests.
+At the end of the year, listeners vote on the best episodes of the year (Thanksgiving-to-Thanksgiving), which are compiled in year-end Best Of episodes that are published over the Christmas-New Year break. Paul F. Tompkins, the most frequent CBB guest, typically cohosts these shows with the show's host, Scott Aukerman.
 
-At the end of the year, listeners vote on the best episodes of the year
-(Thanksgiving-to-Thanksgiving), which are compiled in year-end Best Of
-episodes that are published over the Christmas-New Year break. Paul F.
-Tompkins, the most frequent CBB guest, typically cohosts these shows
-with the show’s host, Scott Aukerman.
+I scraped the data directly from the Earwolf website using the `scrape-earwolf.R`, and then created the image via `cbb-bestof-figure.R`. The top 9 most frequently Best Of'd guests are highlighted by color, and the Best Of episodes are shaded grey.
 
-I scraped the data directly from the Earwolf website using the
-`scrape-earwolf.R`, and then created the image via
-`cbb-bestof-figure.R`. The top 9 most frequently Best Of’d guests are
-highlighted by color, and the Best Of episodes are shaded grey.
-
-![](images/cbb-bestof-plot-1.png)<!-- -->
+![plot of chunk cbb-bestof-plot](images/cbb-bestof-plot-1.png)
 
 ## Shiny App
-
-Sometimes I use this dataset to experiment with Shiny. The dataset
-updates every Friday. You can find a link to the Shiny app at:
+Sometimes I use this dataset to experiment with Shiny. The dataset updates every Friday. You can find a link to the Shiny app at:
 
 <https://colindouglas.shinyapps.io/podcasts/>
-
-There’s a good chance it’s broken.
