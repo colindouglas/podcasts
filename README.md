@@ -1,13 +1,13 @@
 CBB Best Ofs Episodes
 ================
-24-January-2020
+27-January-2020
 
 ## Comedy Bang Bang Appearances
 
 Comedy Bang Bang is an alt-comedy improv podcast published at least
 weekly since 2009. Each episode features one or more guests, who may be
-playing themselves or an improvised character. As of 2020-01-24, there
-have been 681 mainline episodes with 483 unique guests.
+playing themselves or an improvised character. As of 2020-01-27, there
+have been 682 mainline episodes with 483 unique guests.
 
 At the end of the year, listeners vote on the best episodes of the year
 (Thanksgiving-to-Thanksgiving), which are compiled in year-end Best Of
@@ -28,5 +28,3 @@ Sometimes I use this dataset to experiment with Shiny. The dataset
 updates every Friday. You can find a link to the Shiny app at:
 
 <https://colindouglas.shinyapps.io/podcasts/>
-
-There’s a good chance it’s broken.

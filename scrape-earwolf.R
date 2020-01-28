@@ -79,11 +79,10 @@ scrape_earwolf <- function(url) {
     ### Get the episode guests (there can be multiple)
     guest <- html_scrape %>%
       html_nodes(".clearfix") %>%
-      html_text() %>%
-      head(1)
+      html_text()
     
     # If there's no guests, return NA instead of list(character(0))
-    guest <- ifelse(length(guest) == 0, as.character(NA), guest)
+    if (length(guest) == 0) guest <- as.character(NA)
     
     ### Get the episode photos if they exist
     photo_urls <- html_scrape %>%

@@ -9,7 +9,8 @@ guests <- earwolf_podcasts %>%
 
 # Podcasts in order of release date
 podcasts <- guests %>%
-  filter(!is.na(guests)) %>%
+  group_by(podcast) %>%
+  filter(sum(!is.na(guests)) > 50) %>% # Only podcasts with more than 50 guest credits
   arrange(date) %>%
   pull(podcast) %>% 
   unique()
