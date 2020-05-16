@@ -1,8 +1,6 @@
 library(rvest)
 library(tidyverse)
 
-
-
 # Function for reading HTML and tolerating errors
 # Records any URLs that didn't work in a vector called "failures" so they can be retried at the end
 safe_read_html <- function(next_ep) {
