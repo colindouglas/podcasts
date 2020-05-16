@@ -15,7 +15,8 @@ Sys.setenv(RSTUDIO_PANDOC="/usr/lib/rstudio/bin/pandoc/pandoc")
 
 source("cbb-bestof-figure.R")
 ```
-"Last Updated `r format(Sys.time(), '%d-%B-%Y')`"
+**Last Updated** `r format(Sys.time(), '%d-%B-%Y')`
+
 ## Comedy Bang Bang Appearances
 Comedy Bang Bang is an alt-comedy improv podcast published at least weekly since 2009. Each episode features one or more guests, who may be playing themselves or an improvised character. As of `r Sys.Date()`, there have been `r nrow(cbb)` mainline episodes with `r length(unique(all_guests))` unique guests.
 
