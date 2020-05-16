@@ -1,8 +1,12 @@
-"Last Updated 16-May-2020" \#\# Comedy Bang Bang Appearances Comedy Bang
-Bang is an alt-comedy improv podcast published at least weekly since
-2009. Each episode features one or more guests, who may be playing
-themselves or an improvised character. As of 2020-05-16, there have been
-699 mainline episodes with 492 unique guests.
+**Last Updated** 16-May-2020
+
+Comedy Bang Bang Appearances
+----------------------------
+
+Comedy Bang Bang is an alt-comedy improv podcast published at least
+weekly since 2009. Each episode features one or more guests, who may be
+playing themselves or an improvised character. As of 2020-05-16, there
+have been 699 mainline episodes with 492 unique guests.
 
 At the end of the year, listeners vote on the best episodes of the year
 (Thanksgiving-to-Thanksgiving), which are compiled in year-end Best Of
