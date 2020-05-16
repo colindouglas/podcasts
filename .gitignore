@@ -7,8 +7,8 @@ oauth_keys.csv
 .httr-oauth
 test.txt
 test.R
-cbb_reddit_comments_scrape.csv
 depreciated
 .old/
 rsconnect
 README.html
+update-earwolf.sh
